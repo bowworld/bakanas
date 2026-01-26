@@ -1,0 +1,90 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+[% RenderBlockStart("OverviewNavBar") %]
+<div class="OverviewBox ARIARoleMain">
+    <h1>[% Translate(Data.TitleName) | html %]:
+        <div class="overview-breadcrumb">
+            [% Translate(Data.TitleValue) | html %]
+        </div>
+    </h1>
+
+[% RenderBlockStart("OverviewNavBarMain") %]
+
+    <h1>[% Translate(Data.MainName) | html %]:
+        <div class="overview-breadcrumb">
+            [% Data.MainContent %]
+        </div>
+    </h1>
+
+[% RenderBlockEnd("OverviewNavBarMain") %]
+
+    <div class="OverviewControl" id="OverviewControl">
+        <div>
+            <div class="ControlRow">
+[% RenderBlockStart("OverviewNavBarFilter") %]
+                <ul class="Tabs">
+[% RenderBlockStart("OverviewNavBarFilterItem") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSelected") %]
+                    <li class="Active [% Data.CSS | html %]">
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.FilterLink %]Filter=[% Data.Filter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("OverviewNavBarFilterItemSelected") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSelectedNot") %]
+                    <li class="[% Data.CSS | html %]">
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.FilterLink %]Filter=[% Data.Filter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("OverviewNavBarFilterItemSelectedNot") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSplit") %]
+                    -
+[% RenderBlockEnd("OverviewNavBarFilterItemSplit") %]
+[% RenderBlockEnd("OverviewNavBarFilterItem") %]
+                </ul>
+[% RenderBlockEnd("OverviewNavBarFilter") %]
+            </div>
+            <div class="ActionRow">
+                <div class="OverviewActions">
+# &nbsp; because if action row is empty, the pagination and view mode would be shown on the left instead of on the right
+                    &nbsp;
+                    <div>
+                        <span class="Pagination">
+[% RenderBlockStart("OverviewNavBarPageNavBar") %]
+                            <ul>
+                                <li>
+                                    <span>[% Data.ResultLong %]</span>
+                                </li>
+                                <li class="page-links">[% Data.SiteNavBarLong %]</li>
+                            </ul>
+[% RenderBlockEnd("OverviewNavBarPageNavBar") %]
+                        </span>
+                        <ul class="OverviewZoom">
+[% RenderBlockStart("OverviewNavBarViewMode") %]
+[% RenderBlockStart("OverviewNavBarViewModeSelected") %]
+                            <li class="Active">
+                                <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
+                                    [% Translate(Data.NameShort) | html %]
+                                </a>
+                            </li>
+[% RenderBlockEnd("OverviewNavBarViewModeSelected") %]
+[% RenderBlockStart("OverviewNavBarViewModeNotSelected") %]
+                            <li>
+                                <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
+                                    [% Translate(Data.NameShort) | html %]
+                                </a>
+                            </li>
+[% RenderBlockEnd("OverviewNavBarViewModeNotSelected") %]
+[% RenderBlockEnd("OverviewNavBarViewMode") %]
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("OverviewNavBar") %]

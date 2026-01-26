@@ -1,0 +1,499 @@
+/*
+Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (GPL). If you
+did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+*/
+
+/**
+ * @package     OTRS Framework - Skin "Default"
+ * @section     Customer
+ */
+
+@media screen,projection,tv,handheld {
+
+/**
+ * @subsection  Navigation
+ */
+#Navigation {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 var(--padding-xl);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    transition: var(--main-transition);
+    background: var(--white);
+}
+
+#Navigation #HeaderToolBar .logo-navbar-mobile {
+    display: none;
+}
+
+#Navigation > ul {
+    display: flex;
+}
+
+.RTL #Navigation > ul {
+    float: right;
+}
+
+#Navigation > ul > li > ul {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    z-index: 99;
+    background: var(--menu-bg);
+    min-width: 100%;
+    box-shadow: var(--menu-box-shadow);
+    border-radius: var(--border-radius-xs);
+    padding: var(--padding-sm);
+}
+
+.RTL #Navigation > ul > li > ul {
+    right: 1px;
+}
+
+/*#Navigation > ul > li > ul::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 5px;
+    background: transparent;
+
+}*/
+
+/*#Navigation > ul > li:hover ul:not(:empty),
+#Navigation > ul > li a:focus + ul:not(:empty),*/
+#Navigation > ul > li ul.Expanded:not(:empty:blank) {
+    display: block;
+    z-index: 1000;
+}
+
+#Navigation .Individual {
+    float: right;
+}
+
+.RTL #Navigation .Individual {
+    float: left;
+}
+
+#Navigation > ul > li {
+    position: relative;
+    display: flex;
+}
+
+#Navigation > ul > li:last-child {
+    border-right: 0px;
+}
+
+.RTL #Navigation > ul > li {
+    float: right;
+    margin: -1px -2px 0 0;
+}
+
+#Navigation > ul > li > a {
+    display: block;
+    height: auto;
+    padding: var(--padding-md) var(--padding-sm);
+    font-size: var(--main-font-size);
+    line-height: var(--main-line-height);
+    color: var(--menu-font);
+    position: relative;
+}
+
+#Navigation > ul > li > a:after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: -12px;
+    left: 0px;
+    background: var(--primary-color);
+    transform: scale(0, 1);
+    transform-origin: 0;
+    transition: transform 300ms ease;
+    will-change: transform;
+    border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+}
+
+#Navigation > ul > li:hover > a:after {
+    transform: scale(1, 1);
+}
+
+#Navigation > ul > li.Selected > a:after {
+    content: "";
+}
+
+/* #Navigation > ul > li:last-child > a:after {
+    display: none;
+} */
+
+#Navigation > ul > li > ul > li {
+    position: relative;
+    display: block;
+    white-space: nowrap;
+    border-top: 2px solid transparent;
+}
+
+#Navigation > ul > li > ul > li:first-child {
+    border-top: 0;
+}
+
+#Navigation > ul > li > ul a {
+    display: block;
+    position: relative;
+    color: var(--menu-font);
+    padding: var(--padding-sm) var(--padding-sm);
+    border-bottom: none;
+    font-size: var(--main-font-size);
+    transition: var(--main-transition);
+    border-radius: var(--border-radius-xs);
+    cursor: pointer;
+}
+
+#Navigation > ul > li > ul li:last-child {
+}
+
+#Navigation > ul > li > ul a:hover,
+#Navigation > ul > li > ul a:focus,
+#Navigation > ul > li > ul a.SubSelected {
+    background: var(--gray-light);
+}
+
+.RTL #Navigation li:first-child a,
+#Navigation li::last-child a {
+    background-image: none;
+}
+
+.RTL #Navigation > ul > li > ul {
+    min-width: 120px;
+}
+
+.RTL #Navigation > ul > li > ul a {
+    padding: 4px 6px 4px 15px;
+    white-space: normal;
+}
+
+#Navigation li:active {
+}
+
+#Navigation .Selected + li {
+    margin-left: -1px;
+}
+
+#Navigation .Selected + li a {
+    padding-left: 10px;
+}
+
+#Navigation .Selected,
+#Navigation .Selected:active,
+#Navigation > ul > li:hover {
+
+}
+
+#Navigation > ul > li > a::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: var(--primary-color);
+    transform: scale(0, 1);
+    transform-origin: 0;
+    transition: transform 300ms ease;
+    will-change: transform;
+    border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+    z-index: 10;
+  }
+
+#Navigation > ul > li.Selected > a::after {
+    transform: scale(1, 1);
+  }
+
+#Navigation .Selected > a,
+#Navigation > ul > li:hover > a {
+    color: var(--primary-color);
+}
+
+
+@media only screen and (max-width: 1024px) {
+    #Navigation {
+        position: fixed;
+        height: 100%;
+        left: -300px;
+        width: 300px;
+        z-index: 998;
+        top: 0px;
+        padding: 0;
+        flex-direction: column;
+    }
+
+    #Navigation #HeaderToolBar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding: var(--padding-md);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        align-items: center;
+    }
+
+    #Navigation #HeaderToolBar .logo-navbar-mobile {
+        width: 120px;
+        height: 27px;
+        background: url(../img/znuny-logo-black.svg) no-repeat;
+        background-size: auto;
+        background-size: contain;
+        position: relative;
+        display: flex;
+    }
+
+    #Navigation > ul.menuItems {
+        flex-direction: column;
+        width: 100%;
+        padding: var(--padding-md) 0 0;
+        overflow: auto;
+    }
+
+    #Navigation > ul.menuItems > li {
+        display: flex;
+        flex-direction: column;
+        padding: 0 var(--padding-md) 0 0;
+    }
+
+    #Navigation ul.menuItems li a {
+        font-weight: normal;
+        padding: var(--padding-md);
+        line-height: 20px;
+        transition: var(--main-transition);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        display: flex;
+        width: 100%;
+        border-radius: 0 var(--border-radius-menu-mobile) var(--border-radius-menu-mobile) 0;
+    }
+
+    #Navigation > ul.menuItems > li > a::after {
+        width: 0;
+        height: 0;
+        border-radius: 0;
+    }
+
+    #Navigation > ul.menuItems > .Selected a,
+    #Navigation > ul.menuItems > li:focus a,
+    #Navigation > ul.menuItems > li:hover a {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
+    #Navigation .Selected + li {
+        margin: 0;
+    }
+
+    #Navigation .Selected + li a {
+        padding: var(--padding-md);
+    }
+
+    #Navigation .Selected > a,
+    #Navigation > ul > li:hover > a {
+        color: var(--white);
+    }
+
+    #Navigation > ul.menuItems > li > ul {
+        display: flex;
+        position: relative;
+        top: unset;
+        left: unset;
+        z-index: 99;
+        background: transparent;
+        min-width: 100%;
+        box-shadow: none;
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-xs);
+    }
+
+    .RTL #Navigation > ul.menuItems > li > ul {
+        right: 1px;
+    }
+
+    #Navigation > ul.menuItems > li > ul > li {
+        font-size: 11px;
+        line-height: 11px;
+        margin-top: 0;
+        position: relative;
+        white-space: nowrap;
+      }
+}
+
+
+/**
+ * @subsection  Action Row
+ */
+
+.ActionRow,
+#BottomActionRow.ActionRow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    padding: 0;
+    flex: 1;
+    width: 100%;
+    max-width: 800px;
+    align-self: center;
+    gap: var(--gap-sm);
+}
+
+#BottomActionRow.ActionRow {
+    border: 0;
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+}
+
+.FormScreen .ActionRow {
+    padding: 0 var(--padding-lg);
+}
+
+.ActionRow.ActionRow-full-width,
+#BottomActionRow.ActionRow.ActionRow-full-width {
+    max-width: 100%;
+}
+
+@media only screen and (min-width: 1400px) {
+    .FormScreen .ActionRow {
+        max-width: 100%;
+        padding: 0 var(--padding-sm);
+    }
+}
+
+.ActionRow.tabs-overview {
+    max-width: 100%;
+}
+
+#BottomActionRow {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+
+
+/**
+ * @subsection  Filter
+ */
+
+.Filter {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: 0 var(--padding-xs);
+}
+
+.Filter li {
+    padding: var(--padding-xs) 2px var(--padding-xs) 0;
+}
+
+.Filter li a {
+    position: relative;
+    display: flex;
+    padding: var(--padding-sm) var(--padding-md);
+    color: var(--main-font-color);
+    font-size: var(--main-font-size);
+    transition: var(--main-transition);
+}
+
+.Filter li a:hover {
+    background-color: var(--gray-light-semi);
+    border-radius: var(--border-radius-xxs);
+}
+
+.RTL .Filter li a {
+    background-position: left;
+}
+
+.Filter li .Selected,
+.Filter li .Selected:hover,
+.Filter li .Selected:active {
+    background: none;
+    position: relative;
+    font-weight: var(--bold);
+    color: var(--black);
+    pointer-events: none;
+}
+
+.Filter li .Selected::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    background-color: var(--black);
+    height: 2px;
+    left: 0;
+    bottom: -5px;
+}
+
+
+
+/**
+ * @subsection  OverviewActions
+ */
+
+
+.OverviewActions {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    padding: 0 var(--padding-md);
+}
+
+.Sortable .ActionRow {
+    border-bottom: none;
+}
+
+.Sortable #BottomActionRow {
+    padding-bottom: 0;
+}
+
+/**
+ * @subsection  SerachTerms
+ */
+
+.SearchTerms {
+    padding: 4px 7px;
+}
+
+.SearchTerms h2 {
+    margin: 0;
+    color: #222;
+    font-size: 15px;
+    display: inline;
+    text-shadow: 0 1px 0 #EEE;
+}
+
+.SearchTerms span {
+    padding: 1px 8px 0;
+    margin: 0 3px;
+    color: #666;
+    background: #FFF;
+    border: 1px solid #BBB;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 1px 2px #DDD inset, 0 1px 0 #E8E8E8;
+    box-shadow: 0 1px 2px #DDD inset, 0 1px 0 #E8E8E8;
+}
+
+.SearchTerms span a {
+    font-size: 13px;
+    vertical-align: bottom;
+}
+
+} /* end @media */

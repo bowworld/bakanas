@@ -1,0 +1,897 @@
+/*
+Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (GPL). If you
+did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     TicketDetails
+ */
+
+@media screen,projection,tv,handheld {
+
+/**
+ * @subsection  Headline
+ */
+div.Headline {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: /*var(--padding-md)*/ 0;
+    position: relative;
+    justify-content: flex-start;
+    min-width: 100%;
+}
+
+div.Headline h1 {
+    font-size: var(--font-size-xl);
+    line-height: 36px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.Headline h1 span {
+    padding: 0 3px;
+}
+
+div.Headline .Flag + h1 {
+    margin-left: var(--margin-sm);
+}
+
+.RTL div.Headline .Flag + h1 {
+    margin-left: 0;
+    margin-right: var(--margin-sm);
+}
+
+/*  This flag is already being styled through the .Flag and .Small classes
+div.Headline .Flag {
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    width: 24px;
+    height: 12px;
+}*/
+
+.RTL div.Headline .Flag {
+    left: auto;
+    right: 0;
+}
+
+/**
+ * @subsection  Article view settings
+ */
+
+.ArticleView {
+    /*position: absolute;
+    right: 3px;
+    top: 7px;*/
+    position: relative;
+    right: unset;
+    top: unset;
+    display: flex;
+    align-self: baseline;
+    align-items: center;
+}
+
+/**
+ * @subsection  Article table head
+ */
+
+.ActionRow .TableContextSettings + .TableSmall {
+    margin-right: 17px;
+}
+
+/**
+ * @subsection  Article table body
+ */
+
+#ArticleItems .WidgetSimple .Header,
+#WidgetTicket.WidgetSimple .Header {
+    display: flex;
+    gap: 4px;
+    overflow: hidden;
+}
+
+#ArticleItems .WidgetSimple .Header h2 {
+    max-width: calc(100% - 60px);
+}
+
+#ArticleItems .WidgetSimple .Header .AdditionalInformation {
+    position: static;
+    line-height: 22px;
+    font-size: 11px;
+    float: right;
+}
+
+#ArticleItems .WidgetSimple.Expanded .Content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    padding: var(--padding-lg);
+}
+
+#ArticleItems .WidgetSimple .Content .ArticleMailContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--gap-md);
+}
+
+#ArticleItems  .Incoming .Content .ArticleMailContent {
+    flex-direction: row-reverse;
+}
+
+#ArticleItems .WidgetSimple .Content .ArticleMailContent .article-inner-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#ArticleItems .WidgetSimple .Content .ArticleMailContent .Avatar {
+    display: flex;
+    width: 100%;
+    max-width: 80px;
+}
+
+#ArticleItems .WidgetSimple .Content .ArticleMailContent .Avatar img {
+    border-radius: var(--border-radius-xxs);
+}
+
+#ArticleTableBody {
+    position: relative;
+    overflow: hidden;
+    border-bottom: none;
+    margin: 0px;
+    height: 100% !important;
+}
+
+#ArticleTableBody .Scroller {
+    /* temporary forced style to override inline styles */
+    /* height is dynamically changed inline with table size adjustments */
+    height: auto;
+    width: 100% !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 0 !important;
+    border: none;
+}
+
+#ArticleTableBody .Scroller::-webkit-scrollbar-track {
+	background-color: #F5F5F5;
+    border-left: 1px solid #ccc;
+}
+
+#ArticleTableBody .Scroller::-webkit-scrollbar {
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+#ArticleTableBody .Scroller::-webkit-scrollbar-thumb {
+	background-color: #bbb;
+}
+
+#ArticleTableBody .Scroller .DataTable {
+    border: 0px;
+}
+
+.ArticleMailHeader {
+    font-size: 11px;
+    margin: 0;
+    margin-bottom: 0px;
+    padding: var(--padding-lg);
+    /*border-top: var(--border-width) var(--border-solid) var(--border-color);*/
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    margin-bottom: 10px;
+    background: var(--email-info);
+}
+
+.ArticleMailHeader fieldset > div {
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    font-size: var(--font-size-sm);
+}
+
+/*.Outgoing .ArticleMailHeader fieldset.TableLike.FixedLabelSmall > label,
+.Outgoing .ArticleMailHeader fieldset.TableLike.FixedLabelSmall > .Row > label {
+    width: 105px;
+    float: left;
+}*/
+
+.ticketDetails {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+.ticketDetails:empty {
+    display: none;
+}
+
+#ArticleItems .ItemActions {
+    display: flex;
+    flex-flow: row;
+    position: relative;
+    padding: var(--padding-lg);
+    box-sizing: border-box;
+    background: var(--main-bg-color);
+    border-top-left-radius: var(--border-radius-md);
+    border-top-right-radius: var(--border-radius-md);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+
+
+@media only screen and (min-width: 0px) and (max-width: 1024px) {
+
+    #ArticleItems .ItemActions li .InputField_Container {
+        width: auto;
+    }
+
+}
+
+#ArticleItems .ItemActions li .InputField_Container input[type=text] {
+    padding: var(--padding-xs);
+}
+
+#ArticleItems .Outgoing .ItemActions {
+    border-top-color: var(--mail-outgoing-color);
+    border-left-color: var(--mail-outgoing-color);
+    border-right-color: var(--mail-outgoing-color);
+}
+
+#ArticleItems .ArticleMailHeader label,
+#ArticleItems .ArticleMailHeader p.Value {
+    display: flex;
+    line-height: 30px;
+    gap: 0;
+}
+
+#ArticleItems .ArticleMailHeader label {
+    justify-content: flex-end;
+    padding-right: var(--padding-sm);
+    color: var(--gray-dark-semi);
+}
+
+#ArticleItems .ArticleMailHeader p.Value {
+    width: calc(100% - 112px);
+}
+
+#ArticleItems .Incoming .ArticleMailHeader p.Value {
+    width: calc(100% - 103px);
+}
+
+#ArticleItems .ArticleMailHeader p.Value .Switch {
+    line-height: 30px;
+    display: flex;
+}
+
+#ArticleItems .ArticleMailContentHTMLWrapper,
+#ArticleItems .ArticleHTML,
+#ArticleItems .ArticleBody {
+    -webkit-overflow-scrolling: touch;
+   margin-left: 0;
+   margin-right: 0;
+   position: relative;
+   word-break: break-all;
+}
+
+#ArticleItems .Incoming .ArticleMailContentHTMLWrapper,
+#ArticleItems .Incoming .ArticleHTML,
+#ArticleItems .Incoming .ArticleBody {
+    margin-left: 0px;
+    margin-right: 0;
+    border-radius: var(--border-radius-md);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 0;
+}
+
+.ticketDetails .ArticleBody {
+
+}
+
+body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
+   overflow-x: auto;
+}
+
+.Outgoing .ArticleMailContentHTMLWrapper:before,
+.Incoming .ArticleMailContentHTMLWrapper:before,
+.Outgoing .ArticleHTML:before,
+.Incoming .ArticleHTML:before,
+.Outgoing .ArticleBody:before,
+.Incoming .ArticleBody:before,
+.Outgoing .ArticleMailContentHTMLWrapper:after,
+.Incoming .ArticleMailContentHTMLWrapper:after,
+.Outgoing .ArticleHTML:after,
+.Incoming .ArticleHTML:after,
+.Outgoing .ArticleBody:after,
+.Incoming .ArticleBody:after {
+    display: none !important;
+}
+
+.Outgoing .ArticleMailContentHTMLWrapper:before,
+.Incoming .ArticleMailContentHTMLWrapper:before,
+.Outgoing .ArticleHTML:before,
+.Incoming .ArticleHTML:before,
+.Outgoing .ArticleBody:before,
+.Incoming .ArticleBody:before {
+    display: none !important;
+}
+
+.Outgoing .ArticleMailContentHTMLWrapper:after,
+.Incoming .ArticleMailContentHTMLWrapper:after,
+.Outgoing .ArticleHTML:after,
+.Incoming .ArticleHTML:after,
+.Outgoing .ArticleBody:after,
+.Incoming .ArticleBody:after {
+	border-width: 13px;
+	margin-top: -13px;
+    z-index: 1;
+    left: -24px;
+}
+
+.Outgoing .ArticleMailContentHTMLWrapper:after,
+.Outgoing .ArticleHTML:after,
+.Outgoing .ArticleBody:after {
+	border-right-color: #eee;
+}
+
+.Incoming .ArticleMailContentHTMLWrapper:after,
+.Incoming .ArticleHTML:after,
+.Incoming .ArticleBody:after {
+	display: none !important;
+}
+
+.Incoming .ArticleBody:after {
+    right: -26px;
+}
+
+.Incoming .ArticleMailContentHTMLWrapper:before,
+.Incoming .ArticleHTML:before,
+.Incoming .ArticleBody:before {
+	display: none;
+}
+
+.Incoming .ArticleBody:before,
+.Incoming .ArticleHTML:before {
+    right: -20px;
+}
+
+.Outgoing .ArticleBody:before,
+.Outgoing .ArticleHTML:before {
+    left: -20px;
+}
+
+.Outgoing .ArticleBody:after,
+.Outgoing .ArticleHTML:after {
+    left: -26px;
+}
+
+.Incoming.NotVisibleForCustomer .ArticleMailContentHTMLWrapper:after,
+.Incoming.NotVisibleForCustomer .ArticleHTML:after,
+.Incoming.NotVisibleForCustomer .ArticleBody:after {
+    border-left-color: #ffcccc;
+}
+
+.Outgoing.NotVisibleForCustomer .ArticleMailContentHTMLWrapper:after,
+.Outgoing.NotVisibleForCustomer .ArticleHTML:after,
+.Outgoing.NotVisibleForCustomer .ArticleBody:after {
+    border-right-color: #ffcccc;
+}
+
+
+.ArticleSenderInitials {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray-dark-semi);
+    background: #ECECEC;
+}
+
+.ArticleSenderInitials,
+.ArticleSenderImage {
+    width: 100%;
+    height: 100%;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: var(--border-radius-xxs);
+    overflow: hidden;
+}
+
+.ArticleSenderInitials span {
+    font-size: 35px;
+}
+
+.ArticleMailContent iframe {
+    background: #fff;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 60px;
+}
+
+.DataTable tbody td a.Attachment {
+    font-size: 12px;
+}
+
+#ArticleItems .WidgetSimple .Content label.Switchable {
+    cursor: pointer;
+}
+
+/**
+ * @subsection  ControlRow Icons
+ */
+
+.ArticleFilter,
+.ArticlePages {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding-right: var(--padding-xs);
+}
+
+.RTL .ArticleFilter,
+.RTL .ArticlePages {
+    float: right;
+}
+
+.ControlRow .Icons a {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-xs);
+    transition: var(--main-transition);
+    color: var(--gray-dark-semi);
+    width: 26px;
+    height: 26px;
+}
+
+.ControlRow .Icons a:hover {
+    background-color: var(--icon-hover-color-light);
+    color: var(--gray-dark-semi);
+    border-color: var(--border-color);
+}
+
+.ControlRow .Icons a i {
+    color: var(--gray-darker);
+    font-size: 15px;
+    display: block;
+}
+
+.ControlRow .Icons a.Active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.ControlRow .Icons a.Active i {
+    color: #fff;
+}
+
+.ControlRow .Icons a span {
+    margin: 4px auto;
+    width: 16px;
+    height: 16px;
+    text-indent: -9999px;
+    display: block;
+    position: absolute; /* temporary */
+}
+
+.ControlRow .ArticleFilter.Icons .Active span {
+    background-position: 0 -16px;
+}
+
+/**
+ * @subsection  Attachment Dialog Content
+ */
+
+.Dialog > .Content > .Attachment.InnerContent {
+    padding: 0;
+}
+
+.AttachmentContent {
+    width: 300px;
+    height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.AttachmentElement {
+    margin: 5px 9px;
+    border-bottom: 1px solid #E6E6E6;
+    padding-bottom: 2px;
+}
+
+.AttachmentElement:last-child {
+    border-bottom: 0px;
+}
+
+.AttachmentPreview {
+    height: 80px;
+    width: 60px;
+    border: 1px solid #DDD;
+    float: left;
+    margin-right: 15px;
+    background-color: #E6E6E6;
+    background-position: center;
+    background-repeat: no-repeat;
+    clear: left;
+}
+
+.AttachmentPreview a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.AttachmentElement h3 {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/**
+ * @subsection  ItemRow
+ * @note        contains random items and is positioned in the sidebar
+ */
+
+.ItemRow {
+    display: flex;
+    flex-direction: column;
+}
+
+.RTL .ItemRow {
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+.ItemRow li {
+    padding: var(--padding-sm) 0 0;
+}
+
+.RTL .ItemRow li {
+    padding: 3px 8px 5px 0;
+}
+
+.ItemRow a {
+    line-height: 14px;
+    color: #000;
+    text-decoration: underline;
+}
+
+.ItemRow a:hover {
+    color: #666;
+}
+
+/**
+ * @subsection  ArticleBody
+ * @note        Styles for article body
+ */
+
+
+/**
+ * @subsection  ArticleColors
+ * @note        article colors
+ */
+
+#ArticleTable.DataTable tbody td {
+    border-right-style: none;
+}
+
+tbody td.Sender {
+    line-height: normal;
+}
+
+#ArticleTable.DataTable tbody td:last-child {
+    border-right: 0px;
+}
+
+.UseArticleColors tr.agent.Active > td,
+.UseArticleColors tr.system.Active > td,
+.UseArticleColors tr.customer.Active > td {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+.UseArticleColors tr.agent.Incoming.VisibleForCustomer:hover > td,
+.UseArticleColors tr.customer.Incoming.VisibleForCustomer:hover > td,
+.UseArticleColors tr.NotVisibleForCustomer:hover > td,
+.UseArticleColors tr.agent.Outgoing.VisibleForCustomer:hover > td,
+.UseArticleColors tr.system.Outgoing.VisibleForCustomer:hover > td,
+.UseArticleColors tr.system.Incoming.VisibleForCustomer:hover > td,
+.UseArticleColors tr.customer.Outgoing.VisibleForCustomer:hover > td {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color);
+}
+
+.ArticleMailContent iframe,
+.ArticleMailContent .ArticleBody,
+.ArticleMailContent .ArticleHTML,
+.ArticleMailContent .ArticleMeta {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: var(--padding-lg);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 0;
+}
+
+.UseArticleColors #ArticleItems .NotVisibleForCustomer .ArticleMailContent iframe,
+.UseArticleColors #ArticleItems .NotVisibleForCustomer .ArticleMailContent .ArticleBody,
+.UseArticleColors #ArticleItems .NotVisibleForCustomer .ArticleMailContent .ArticleHTML,
+.UseArticleColors #ArticleItems .NotVisibleForCustomer .ArticleMailContent .ArticleMeta {
+    border: var(--border-width) var(--border-solid) var(--mail-outgoing-color);
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.UseArticleColors .Incoming.NotVisibleForCustomer .ArticleMailContentHTMLWrapper:after,
+.UseArticleColors .Incoming.NotVisibleForCustomer .ArticleHTML:after,
+.UseArticleColors .Incoming.NotVisibleForCustomer .ArticleBody:after {
+    border-left-color: #ffcccc;
+}
+
+.UseArticleColors .Outgoing.NotVisibleForCustomer .ArticleMailContentHTMLWrapper:after,
+.UseArticleColors .Outgoing.NotVisibleForCustomer .ArticleHTML:after,
+.UseArticleColors .Outgoing.NotVisibleForCustomer .ArticleBody:after {
+    border-right-color: #ffcccc;
+}
+
+.UseArticleColors #ArticleItems .system .ArticleMailContent iframe,
+.UseArticleColors #ArticleItems .system .ArticleMailContent .ArticleBody,
+.UseArticleColors #ArticleItems .system .ArticleMailContent .ArticleHTML,
+.UseArticleColors #ArticleItems .system .ArticleMailContent .ArticleMeta {
+    border: 2px solid #ffef80;
+}
+
+.UseArticleColors .Incoming.system .ArticleMailContentHTMLWrapper:after,
+.UseArticleColors .Incoming.system .ArticleHTML:after,
+.UseArticleColors .Incoming.system .ArticleBody:after {
+    border-left-color: #ffef80;
+}
+
+.UseArticleColors .Outgoing.system .ArticleMailContentHTMLWrapper:after,
+.UseArticleColors .Outgoing.system .ArticleHTML:after,
+.UseArticleColors .Outgoing.system .ArticleBody:after {
+    border-right-color: #ffef80;
+}
+
+.UseArticleColors #ArticleTable a {
+    /* defaults to table color in this way */
+    color: unset;
+}
+
+.UseArticleColors #ArticleTable i.fa-spin {
+    color: #333;
+}
+
+/*
+* Agent article types
+*/
+.UseArticleColors .agent-phone > td,
+.UseArticleColors .agent-phone .Header {
+    background: #d1e8d1 !important;
+}
+.UseArticleColors .agent-email-external > td,
+.UseArticleColors .agent-email-external .Header {
+    background: #D3E5B5 !important;
+}
+.UseArticleColors .agent-email-internal > td,
+.UseArticleColors .agent-email-internal .Header {
+    background: #ffd1d1 !important;
+}
+.UseArticleColors .agent-note-external > td,
+.UseArticleColors .agent-note-external .Header {
+    background: #d1d1d1 !important;
+}
+.UseArticleColors .agent-note-internal > td,
+.UseArticleColors .agent-note-internal .Header {
+    background: #FFCCCC !important;
+}
+
+/*
+* System article types
+*/
+.UseArticleColors .system-note-internal > td,
+.UseArticleColors .system-note-internal .Header,
+.UseArticleColors .system-note-external > td,
+.UseArticleColors .system-note-external .Header,
+.UseArticleColors .system-note-report > td,
+.UseArticleColors .system-note-report .Header,
+.UseArticleColors .system-email-external > td,
+.UseArticleColors .system-email-external .Header,
+.UseArticleColors .system-email-internal > td,
+.UseArticleColors .system-email-internal .Header,
+.UseArticleColors .system-email-notification-int > td,
+.UseArticleColors .system-email-notification-int .Header,
+.UseArticleColors .system-email-notification-ext > td,
+.UseArticleColors .system-email-notification-ext .Header {
+    background: #ffffd1 !important;
+}
+
+/*
+* Customer artcle types
+*/
+
+.UseArticleColors .customer-webrequest > td,
+.UseArticleColors .customer-webrequest .Header,
+.UseArticleColors .customer-email-external > td,
+.UseArticleColors .customer-email-external .Header,
+.UseArticleColors .customer-note-external > td,
+.UseArticleColors .customer-note-external .Header,
+.UseArticleColors .customer-phone > td,
+.UseArticleColors .customer-phone .Header {
+    background: #D4DEFC !important;
+}
+
+.UseArticleColors .agent-phone:hover > td,
+.UseArticleColors .agent-email-external:hover > td,
+.UseArticleColors .agent-email-internal:hover > td,
+.UseArticleColors .agent-note-external:hover > td,
+.UseArticleColors .agent-note-internal:hover > td,
+.UseArticleColors .system-note-internal:hover > td,
+.UseArticleColors .system-note-external:hover > td,
+.UseArticleColors .system-note-report:hover > td,
+.UseArticleColors .system-email-external:hover > td,
+.UseArticleColors .system-email-internal:hover > td,
+.UseArticleColors .customer-webrequest:hover > td,
+.UseArticleColors .customer-email-external:hover > td,
+.UseArticleColors .customer-note-external:hover > td,
+.UseArticleColors .customer-phone:hover > td {
+    background: #FCB24B !important;
+}
+
+.ItemRow i.Unsupported,
+.ItemRow a.Unsupported {
+    opacity: 0.4;
+}
+
+
+
+.approval-container li:after {
+    display: none;
+}
+
+.approval-container .approval-val {
+    font-weight: var(--normal);
+    color: var(--primary-color);
+    margin-left: 8px;
+}
+
+.ContentColumn .WidgetSimple .Content.ProcessInfo {
+    padding:  0;
+}
+
+.ProcessInformation h2 {
+    color: var(--black);
+    font-weight: var(--normal);
+    padding-left: var(--padding-sm);
+    margin-top: var(--margin-sm);
+    margin-bottom: 0;
+}
+
+.ProcessInformation > fieldset.flex-column {
+    gap: 0;
+    padding: 0;
+}
+
+.ProcessInformation fieldset > div::after {
+    content: '';
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    margin-top: var(--margin-sm) 0;
+}
+
+.ProcessInformation fieldset > div:last-child::after,
+.ProcessInformation fieldset div:empty::after {
+    display: none;
+    border: 0;
+    background: 0;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    width: 0;
+}
+
+.ProcessInformation fieldset > div > div {
+    width: 100% !important;
+    max-width: calc(25% - var(--gap-xs));
+    padding-right: var(--padding-sm);
+    padding-bottom: var(--padding-sm);
+    padding-left: var(--padding-xs);
+}
+
+.ProcessInformation fieldset > div > div:first-child,
+.ProcessInformation fieldset > div > div:nth-child(5),
+.ProcessInformation fieldset > div > div:nth-child(9) {
+    padding-left: var(--padding-lg);
+}
+
+.ProcessInformation fieldset > div > div:nth-child(4),
+.ProcessInformation fieldset > div > div:nth-child(8),
+.ProcessInformation fieldset > div > div:nth-child(12) {
+    padding-right: var(--padding-lg);
+}
+
+
+.ProcessInformation .LightRow label,
+.ProcessInformation .LightRow a {
+    font-size: var(--font-size-sm);
+    color: var(--gray-dark);
+    font-weight: var(--normal);
+    /*font-family: Inter; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ProcessInformation .LightRow a {
+    font-size: var(--font-size-lg);
+}
+
+.WidgetSimple .ProcessInformation p {
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 1024px) {
+
+    .Avatar,
+    .ArticleMailContentHTMLWrapper:after,
+    .ArticleHTML:after,
+    .ArticleBody:after,
+    .ArticleMailContentHTMLWrapper:before,
+    .ArticleHTML:before,
+    .ArticleBody:before {
+        display: none;
+    }
+
+    #ArticleItems .ArticleMailContentHTMLWrapper,
+    #ArticleItems .ArticleHTML,
+    #ArticleItems .ArticleBody,
+    .ArticleMailContent .ArticleMeta,
+    .ItemActions {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    #ArticleItems .ItemActions .Actions li {
+        white-space: nowrap;
+    }
+
+    #ArticleItems .ItemActions .Actions li form {
+        width: auto;
+        overflow: visible;
+    }
+
+    #ArticleItems .ArticleMailHeader > fieldset {
+        margin-left: 20px;
+    }
+
+    #ArticleItems .ArticleMailHeader label,
+    #ArticleItems .ArticleMailHeader p.Value {
+        font-size: 1.2em;
+        width: auto;
+        float: none;
+        display: inline;
+    }
+
+    #ArticleItems .ItemActions li .InputField_Container {
+        opacity: 1;
+    }
+}
+
+} /* end @media */

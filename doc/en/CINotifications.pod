@@ -1,0 +1,73 @@
+=head1 NAME
+
+CINotifications
+
+=head1 DESCRIPTION
+
+=head1 USE CASES
+
+The subsequent sections describe a few use cases for this addon.
+
+=head2 Inform owner about end of license
+
+This use case was the main reason to develop this addon. Owners
+should be informed when the license is about to expire. So it can
+help to avoid the situation where the software cannot be used or
+is used without permission/license.
+
+Example configuration:
+
+    Licence Key -> Expiration Date: within the next month
+    Mail Frequency: once a month
+
+Recipient:
+
+    Owner
+
+Subject:
+
+    "License will expire within the next month"
+
+Body:
+
+    Dear Owner,
+  
+    The license key for <OTRS_CI_Name> will expire within the next month.
+    Please consider to buy new licenses.
+  
+    http://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_...>?Action=AgentITSMConfigItemZoom;ConfigItemID=<OTRS_CI_ID>
+
+=head2 Remind admins about recurrent maintenance work
+
+Sometime monthly maintenance work has to be done for servers. To create a new ticket for each server every
+month, you can configure a notification like this:
+
+Example configuration:
+
+    Installation Date: more than 1 day ago
+
+Recipient:
+
+    Email address: otrs@your.domain.com
+
+Subject:
+
+    Maintenance work for <OTRS_CI_Name>
+
+Body:
+
+    Dear Admin,
+  
+    please do some maintenance work:
+  
+    [ ] check harddrives
+    [ ] check disk usage
+    [ ] check logfiles
+   
+    http://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_...>?Action=AgentITSMConfigItemZoom;ConfigItemID=<OTRS_CI_ID>
+
+=head1 AUTHOR AND LICENSE
+
+AGPL 3.0
+
+  Renee Baecker <info@feature-addons.de>

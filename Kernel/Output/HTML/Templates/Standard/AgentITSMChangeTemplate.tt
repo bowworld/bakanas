@@ -1,0 +1,83 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+<form action="[% Env("CGIHandle") %]" method="post" name="compose" id="Compose" class="Validate WidgetSimple PreventMultipleSubmits">
+    <input type="hidden" name="Action"       value="[% Env("Action") %]">
+    <input type="hidden" name="Subaction"    value="AddTemplate">
+    <input type="hidden" name="ChangeID"     value="[% Data.ChangeID | html %]">
+
+    <div class="LayoutPopup ARIARoleMain">
+        <div class="Header">
+            <h1>[% Translate("Save Change as Template") | html %]: [% Config("ITSMChange::Hook") %] [% Data.ChangeNumber %]: [% Data.ChangeTitle | html %]</h1>
+            <div class="SaveButtons">
+                <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
+            </div>
+        </div>
+        <div class="Content">
+
+            <fieldset class="TableLike FixedLabelSmall">
+
+                <div class="field-wrapper">
+                    <label for="TemplateName">[% Translate("Template Name") | html %]:</label>
+                    <div class="Field">
+                        <input type="text" id="TemplateName" name="TemplateName" value="[% Data.TemplateName | html %]" class="W75pc Validate_Required [% Data.TemplateNameInvalid | html %]" />
+                        <div id="TemplateNameError" class="TooltipErrorMessage" ><p>[% Translate("A template should have a name!") | html %]</p></div>
+                        <div id="TemplateNameServerError" class="TooltipErrorMessage"><p>[% Translate("The template name is required.") | html %]</p></div>
+                    </div>
+                </div>
+
+                <div class="field-wrapper">
+                    <label for="Comment">[% Translate("Comment") | html %]:</label>
+                    <div class="Field">
+                        <input type="text" id="Comment" name="Comment" value="[% Data.Comment | html %]" class="W75pc" />
+                    </div>
+                </div>
+
+                <div class="field-wrapper">
+                    <label for="StateReset">[% Translate("Reset States") | html %]:</label>
+                    <div class="Field">
+                        [% Data.StateResetSelectionString %]
+                    </div>
+                </div>
+
+[% RenderBlockStart("OverwriteTemplate") %]
+                <div class="field-wrapper">
+                    <label for="OverwriteTemplate">[% Translate("Overwrite original template") | html %]:</label>
+                    <div class="Field">
+                        [% Data.OverwriteTemplateSelectionString %]
+                    </div>
+                </div>
+[% RenderBlockEnd("OverwriteTemplate") %]
+
+[% RenderBlockStart("DeleteChange") %]
+                <div class="field-wrapper">
+                    <label for="DeleteChange">[% Translate("Delete original change") | html %]:</label>
+                    <div class="Field">
+                        [% Data.DeleteChangeSelectionString %]
+                    </div>
+                </div>
+[% RenderBlockEnd("DeleteChange") %]
+
+                <div class="field-wrapper">
+                    <label for="ValidID">[% Translate("Validity") | html %]:</label>
+                    <div class="Field">
+                        [% Data.ValidSelectionString %]
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="TableLike">
+                <div class="field-wrapper form-button-actions">
+                    <div class="Field buttons-field">
+                        <button class="CallForAction Primary btn-main btn-primary btn-width-md" id="SubmitAddTemplate" accesskey="g" title="[% Translate("Submit") | html %] (g)" type="submit" name="AddTemplate" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>

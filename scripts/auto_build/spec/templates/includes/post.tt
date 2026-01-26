@@ -1,0 +1,19 @@
+export ZNUNYUSER=znuny
+
+[% '#' %] note
+HOST=`hostname -f`
+echo ""
+echo "Next steps: "
+echo ""
+echo "[restart web server]"
+echo " systemctl restart [% WebServiceName || 'apache2.service' %]"
+echo ""
+echo "[install the Znuny database]"
+echo " Make sure your database server is running."
+echo " Use a web browser and open this link:"
+echo " http://$HOST/znuny/installer.pl"
+echo ""
+echo "[start Znuny daemon and corresponding watchdog cronjob]"
+echo " /opt/znuny/bin/znuny.Daemon.pl start"
+echo " /opt/znuny/bin/Cron.sh start"
+echo ""

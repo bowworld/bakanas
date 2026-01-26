@@ -1,0 +1,318 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class="ActionList">
+[% RenderBlockStart("ActionAddItem") %]
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="get">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="ItemEdit"/>
+                            <input type="hidden" name="Class" value="[% Data.Class | html %]"/>
+                            <input type="hidden" name="ItemID" value="NEW"/>
+                            <button class="CallForAction btn-main btn-primary-ghost btn-width-md Create" type="submit" value="[% Translate("Add") | html %]">
+                                <span><i class="fa fa-plus-square"></i>[% Translate("Add Catalog Item") | html %]</span>
+                            </button>
+                        </form>
+                    </li>
+[% RenderBlockEnd("ActionAddItem") %]
+[% RenderBlockStart("ActionAddClass") %]
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="get">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="ItemEdit"/>
+                            <input type="hidden" name="ItemID" value="NEW"/>
+                            <input type="hidden" name="Class" value="NEW"/>
+                            <button class="CallForAction btn-main btn-primary-ghost btn-width-md Create" type="submit" value="[% Translate("Add") | html %]">
+                                <span><i class="fa fa-plus-square"></i>[% Translate("Add Catalog Class") | html %]</span>
+                            </button>
+                        </form>
+                    </li>
+[% RenderBlockEnd("ActionAddClass") %]
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost btn-width-md"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionOverview") %]
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        [% USE ItemsTitle = String(Translate("Items in Class")) %]
+        [% USE EditTitle  = String(Translate("Edit Item")) %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('General Catalog Management'),
+                    Link => 'AdminGeneralCatalog',
+                },
+            ];
+
+            IF Data.Class && Data.Class == 'NEW';
+
+                BreadcrumbPath.push({
+                    Name => Translate('Add Class'),
+                });
+
+            ELSIF Data.Class;
+
+                ClassURI = Data.Class;
+
+                BreadcrumbPath.push({
+                    Name => ItemsTitle.append( ': ', Data.Class ),
+                    Link => 'AdminGeneralCatalog;Subaction=ItemList;Class=' _ ClassURI,
+                });
+
+                IF Data.Subaction && Data.Subaction == 'ItemEdit';
+                    BreadcrumbPath.push({
+                        Name => Data.ItemEdit ? EditTitle.append( ': ', Data.ItemName ) : Translate('Add Item'),
+                    });
+
+                END;
+
+            END;
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+[% RenderBlockStart("OverviewClass") %]
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+                <table class="DataTable">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Catalog Class") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("OverviewClassList") %]
+                        <tr>
+                            <td>
+                                <a class="AsBlock"  href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ItemList;Class=[% Data.Class | uri %]">[% Data.Class | html %]</a>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("OverviewClassList") %]
+[% RenderBlockStart("NoDataFoundMsg") %]
+                        <tr>
+                            <td>
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+                    </tbody>
+                </table>
+            </div>
+[% RenderBlockEnd("OverviewClass") %]
+
+[% RenderBlockStart("OverviewItem") %]
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+
+                <table class="DataTable">
+                    <thead>
+                        <tr>
+                            <th class="W60pc">[% Translate("Name") | html %]</th>
+                            <th class="Center">[% Translate("Validity") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("OverviewItemList") %]
+                        <tr [% IF Data.ValidID != 1%]class="Invalid"[% END %]>
+                            <td>
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ItemEdit;ItemID=[% Data.ItemID | uri %]">[% Data.Name | html %]</a>
+                            </td>
+                            <td class="Center">[% Translate(Data.Valid) | html %]</td>
+                        </tr>
+[% RenderBlockEnd("OverviewItemList") %]
+                    </tbody>
+                </table>
+            </div>
+[% RenderBlockEnd("OverviewItem") %]
+
+[% RenderBlockStart("ItemEdit") %]
+            <div class="Header">
+                <h2>[%-
+                IF Data.Class && Data.Class == 'NEW';
+                    Translate("Add Catalog Class") | html;
+                ELSIF Data.ItemEdit;
+                    Translate("Edit Catalog Item") | html;
+                ELSE;
+                    Translate("Add Catalog Item") | html;
+                END;
+                %]</h2>
+            </div>
+            <div class="Content">
+
+                <form action="[% Env("CGIHandle") %]" method="get" class="Validate">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="ItemSave"/>
+                    <input type="hidden" name="ItemID" value="[% Data.ItemID | html %]"/>
+                    <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
+                    <fieldset class="TableLike no-padding">
+[% RenderBlockStart("ItemEditClassAdd") %]
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="ClassDsc"><span class="Marker">*</span>[% Translate("Catalog Class") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Class" id="ClassDsc" value="[% Data.Name | html %]" class="Validate_Required" maxlength="100" />
+                                <div id="ClassDscError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="ClassDscServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
+                        </div>
+
+[% RenderBlockEnd("ItemEditClassAdd") %]
+[% RenderBlockStart("ItemEditClassExist") %]
+                        <div class="field-wrapper">
+                            <label>[% Translate("Catalog Class") | html %]</label>
+                            <div class="Field">
+                                [% Data.Class | html %]
+                                <input type="hidden" name="Class" value="[% Data.Class | html %]">
+                            </div>
+                        </div>
+
+[% RenderBlockEnd("ItemEditClassExist") %]
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span>[% Translate("Name") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="Validate_Required" maxlength="100"/>
+                                <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
+                        </div>
+
+[% RenderBlockStart("InputKey") %]
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" maxlength="100"/>
+                            </div>
+                        </div>
+
+[% RenderBlockEnd("InputKey") %]
+[% RenderBlockStart("Input") %]
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:<br/>
+                            [% IF (Data.Desc) %]
+                                <em>([% Translate(Data.Desc) | html %])</em>
+                            [% END %]
+                            </label>
+                            <div class="Field">
+                                <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]"/>
+                            </div>
+                        </div>
+
+[% RenderBlockEnd("Input") %]
+[% RenderBlockStart("TextArea") %]
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:<br/>
+                            [% IF (Data.Desc) %]
+                                <em>([% Translate(Data.Desc) | html %])</em>
+                            [% END %]
+                            </label>
+                            <div class="Field">
+                                <textarea name="[% Data.Name | html %]" id="[% Data.Name | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]">[% Data.SelectedID | html %]</textarea>
+                            </div>
+                        </div>
+
+[% RenderBlockEnd("TextArea") %]
+[% RenderBlockStart("Option") %]
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:<br/>
+                            [% IF (Data.Desc) %]
+                                <em>([% Translate(Data.Desc) | html %])</em>
+                            [% END %]
+                            </label>
+                            <div class="Field">
+                                [% Data.Option %]
+                            </div>
+                        </div>
+[% RenderBlockEnd("Option") %]
+[% RenderBlockStart("Upload") %]
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" size="30" class="fixed"/><br/>
+                                <a href="">[% Data.Filename | html %]</a>
+                            </div>
+                        </div>
+
+[% RenderBlockEnd("Upload") %]
+[% RenderBlockStart("Password") %]
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input type="password" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value=""/>
+                            </div>
+                        </div>
+
+[% RenderBlockEnd("Password") %]
+[% RenderBlockStart("ColorPicker") %]
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:<br/>
+                            [% IF (Data.Desc) %]
+                                <em>([% Translate(Data.Desc) | html %])</em>
+                            [% END %]
+                            </label>
+                            <div class="Field">
+                                <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" data-jscolor="{backgroundColor: 'rgb(245, 245, 245)', borderColor: 'rgb(201, 201, 201)', borderRadius:'0'}">
+                            </div>
+                        </div>
+
+[% RenderBlockEnd("ColorPicker") %]
+                        <div class="field-wrapper">
+                            <label for="ValidID">[% Translate("Validity") | html %]</label>
+                            <div class="Field">
+                                [% Data.ValidOptionStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="Comment">[% Translate("Comment") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" maxlength="200"/>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                [% IF (Data.Class && Data.Class == 'NEW') || Data.ItemID == 'NEW' %]
+                                    <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+
+                                    <button name="Submit" class="CallForAction Primary btn-main btn-primary btn-width-md" id="Submit" type="submit" value="Submit"><span>[% Translate("Save") | html %]</span></button>
+                                [% ELSE %]
+                                    <a class="btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ItemList;Class=[% Data.Class %]">[% Translate("Cancel") | html %]</a>
+
+                                    <button name="Submit" class="CallForAction Primary btn-main btn-primary-ghost btn-width-md" id="Submit" type="submit" value="Submit"><span>[% Translate("Save and finish") | html %]</span></button>
+
+                                    <button name="SubmitAndContinue" class="CallForAction Primary btn-main btn-primary btn-width-md" id="SubmitAndContinue" type="button" value="Submit"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+[% RenderBlockEnd("ItemEdit") %]
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Overview") %]

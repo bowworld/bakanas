@@ -1,0 +1,129 @@
+/*
+Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (GPL). If you
+did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Application
+ * @subsection  Admin
+ */
+
+@media screen,projection,tv,handheld {
+
+
+/**
+ * @subsection      Upgrade all
+ */
+
+.Dialog > .Content .InnerContent.UpgradeAllDialog {
+    width: 400px;
+    padding: 10px;
+}
+
+.UpgradeAllDialog i.Success,
+.UpgradeAllDialog td.Success,
+.UpgradeAllDialog span.Success {
+    color: green;
+}
+.UpgradeAllDialog td.Warning,
+.UpgradeAllDialog span.Warning {
+    color: #F7AE40;
+}
+.UpgradeAllDialog td.Fail,
+.UpgradeAllDialog span.Fail {
+    color: #E95F53;
+}
+
+.UpgradeAllDialog tr:hover > td {
+    color: #000;
+}
+
+.IntroInstall {
+    background: var(--main-bg-color);
+    padding: var(--padding-sm);
+    border-radius: var(--border-radius-xs);
+    line-height: 100%;
+}
+
+.IntroInstall.NotVerifiedPackage {
+    margin-bottom: 0;
+}
+
+.IntroInstall h3 {
+    display: inline-block;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.IntroInstall ul {
+    list-style-type: square;
+    margin: 10px 0px;
+    padding-left: 15px;
+}
+
+.IntroInstall ul li {
+    margin-bottom: 5px;
+}
+
+.PackageRequired {
+    padding: var(--padding-sm) var(--padding-md);
+}
+
+.PackageRequired > li {
+    margin-bottom: 10px;
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-sm);
+}
+
+.PackageRequired > li:last-child {
+    margin-bottom: 0px;
+}
+
+.PackageRequired > li > p {
+    border-radius: var(--border-radius-xxs);
+    padding: var(--padding-sm) var(--padding-md);
+    margin: 2px 0px 2px 35px;
+    display: inline-block;
+}
+
+.PackageRequired > li h3.Heading {
+    position: relative;
+    padding-left: 35px;
+    font-size: 13px;
+    margin-bottom: 0px;
+}
+
+.PackageRequired > li.CheckResultOK:hover > p {
+    color: #000;
+}
+
+.PackageRequired .CheckResultProblem p {
+    background-color: #EDD3D3;
+}
+
+/**
+ * @subsection  Flag
+ */
+
+.PackageRequired .Flag {
+    position: absolute;
+    left: 0px;
+    top: 2px;
+}
+
+.Flag.OK span {
+    background-color: #008000;
+}
+
+.Flag.Problem span {
+    background-color: #ff0000;
+}
+
+} /* end @media */

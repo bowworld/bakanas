@@ -1,0 +1,12 @@
+var/tmp/*
+var/log/*
+var/sessions/*
+var/stats/*
+var/spool/*
+var/processes/*
+var/httpd/htdocs/js/js-cache/*
+var/httpd/htdocs/skins/*/*/css-cache/*
+.DS_Store
+._*
+Kernel/Config.pm
+var/article/*

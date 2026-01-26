@@ -1,0 +1,39 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+<div id="MainBox" class="ARIARoleMain">
+    <div class="ContentWrapper flex-column ErrorScreen">
+        <h1 class="PageTitle">[% Translate("Error") | html %]</h1>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("An Error Occurred") | html %]</h2>
+            </div>
+            <div class="Content">
+                [% Translate(Data.Message) | truncate(200) | html %]<br>
+[% IF Data.Comment %]
+                [% Translate(Data.Comment) | html %]
+[% END %]
+            </div>
+        </div>
+
+[% IF Data.BackendTraceback %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Traceback") | html %]</h2>
+            </div>
+            <div class="Content">
+                <code>
+                    <pre>Backend [% Data.BackendTraceback | html %]</pre>
+                </code>
+            </div>
+        </div>
+[% END %]
+    </div>
+</div>

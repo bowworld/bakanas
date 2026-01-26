@@ -1,0 +1,69 @@
+
+%defattr(-, znuny, [% webgroup %], -)
+%config(noreplace) /opt/znuny/Kernel/Config.pm
+%attr(-, znuny, root,) %config(noreplace) /opt/znuny/.procmailrc
+%config(noreplace) /opt/znuny/.fetchmailrc
+%config(noreplace) /opt/znuny/.mailfilter
+
+%dir /opt/znuny
+/opt/znuny/RELEASE
+/opt/znuny/ARCHIVE
+/opt/znuny/.bash_completion
+/opt/znuny/.procmailrc.dist
+/opt/znuny/.fetchmailrc.dist
+/opt/znuny/.mailfilter.dist
+
+%dir /opt/znuny/Custom/
+/opt/znuny/Custom/README
+
+%dir /opt/znuny/Kernel/
+
+%dir /opt/znuny/Kernel/Config/
+/opt/znuny/Kernel/Config.pm.dist
+/opt/znuny/Kernel/Config.pod
+/opt/znuny/Kernel/Config/Files/
+/opt/znuny/Kernel/Config/Defaults.pm
+
+/opt/znuny/Kernel/GenericInterface*
+
+/opt/znuny/Kernel/Language.pm
+%dir /opt/znuny/Kernel/Language/
+/opt/znuny/Kernel/Language/*.pm
+
+/opt/znuny/bin*
+/opt/znuny/Kernel/Autoload*
+/opt/znuny/Kernel/Modules*
+/opt/znuny/Kernel/Output*
+/opt/znuny/Kernel/System*
+/opt/znuny/scripts*
+/opt/znuny/i18n/Znuny/*
+
+%dir /opt/znuny/var/
+# TEMPROARILY DEACTIVATED. There are no packages to embed at present.
+#%dir /opt/znuny/var/packages/
+#/opt/znuny/var/packages/*.opm
+%dir /opt/znuny/var/article/
+/opt/znuny/var/fonts/
+/opt/znuny/var/httpd/
+%dir /opt/znuny/var/cron/
+%dir /opt/znuny/var/log/
+%dir /opt/znuny/var/sessions/
+%dir /opt/znuny/var/spool/
+/opt/znuny/var/cron/*
+%dir /opt/znuny/var/tmp/
+%dir /opt/znuny/var/stats/
+/opt/znuny/var/stats/*.xml
+%dir /opt/znuny/var/stats/formatdefinition/excel/
+/opt/znuny/var/stats/formatdefinition/excel/*
+%dir /opt/znuny/var/processes/examples/
+/opt/znuny/var/processes/examples/*
+%dir /opt/znuny/var/webservices/examples/
+/opt/znuny/var/webservices/examples/*.pm
+/opt/znuny/var/webservices/examples/*.yml
+
+/opt/znuny/Kernel/cpan-lib*
+
+%doc /opt/znuny/*.md
+%doc /opt/znuny/COPYING
+%doc /opt/znuny/COPYING-Third-Party
+%doc /opt/znuny/doc*

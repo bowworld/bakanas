@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Config">
+    <Setting Name="CINotifications::Debug" Required="0" Valid="1">
+        <Description Translatable="1">Enable/Disable debugging.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::RecipientFieldTypes" Required="0" Valid="1">
+        <Description Translatable="1">Field types that should be handled as recipient field.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Customer">CustomerUser</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::EventModulePost###1-SetIncidentState" Required="0" Valid="0">
+        <Description Translatable="1">Set incident state when notification is sent.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::PerlServices::CINotification::Event::SetIncidentState</Item>
+                <Item Key="Event">(CINotification_)</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminCINotifications" Required="0" Valid="1">
+        <Description Lang="en">Frontend module registration for CI notifications module in admin area.</Description>
+        <Description Lang="de">Frontendmodul-Registration für das CI-Benachrichtigungs-Modul im Adminbereich.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Manage CI Notifications</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                    <Item Key="Title" Translatable="1">CI Notifications</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminCINotifications###003-CINotifications" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminCINotifications" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">CI Notifications</Item>
+                <Item Key="Block">Ticket</Item>
+                <Item Key="Description" Translatable="1">Manage CI Notifications</Item>
+                <Item Key="IconBig"></Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::Priority" Required="0" Valid="1">
+        <Description Translatable="1">Priority for tickets.</Description>
+        <Navigation>Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">3 normal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::State" Required="0" Valid="1">
+        <Description Translatable="1">State for tickets.</Description>
+        <Navigation>Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">new</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::Owner" Required="0" Valid="1">
+        <Description Translatable="1">Owner for tickets.</Description>
+        <Navigation>Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">root@localhost</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::UseCIOwnerAsCustomer" Required="0" Valid="1">
+        <Description Translatable="1">If enabled, the owner of the CI will be set as customer of the ticket.</Description>
+        <Navigation>Ticket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::CIOwnerAttribute" Required="0" Valid="1">
+        <Description Translatable="1">Attribute where the config item owner is stored.</Description>
+        <Navigation>Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Owner</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::CustomerDefault" Required="0" Valid="1">
+        <Description Translatable="1">Default customer.</Description>
+        <Navigation>Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">root@localhost</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::LinkType" Required="0" Valid="1">
+        <Description Translatable="1">Link ticket and config item.</Description>
+        <Navigation>Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">RelevantTo</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CINotifications::IncidentState" Required="0" Valid="1">
+        <Description Translatable="1">New incident state set by event module.</Description>
+        <Navigation>SetIncidentState</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Incident</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###CINotifications" Required="0" Valid="1">
+        <Description Translatable="1">Send notifications for config items.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">CINotifications</Item>
+                <Item Key="Schedule">*/10 * * * *</Item> <!-- default: every 10 minutes -->
+                <Item Key="Module">Kernel::System::Console::Command::Maint::ITSM::ConfigItem::SendNotifications</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###CINotificationsCron" Required="0" Valid="1">
+        <Description Translatable="1">Send notifications for config items (cron based).</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">CINotificationsCron</Item>
+                <Item Key="Schedule">*/5 * * * *</Item> <!-- default: every 10 minutes -->
+                <Item Key="Module">Kernel::System::Console::Command::Maint::ITSM::ConfigItem::CronNotifications</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+</otrs_config>
