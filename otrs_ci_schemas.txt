@@ -1,0 +1,1542 @@
+### CLASS: Approvals ###
+---
+- Input:
+    Class: ITSM::ConfigItem::Approvals::Type
+    Required: 1
+    Type: GeneralCatalog
+  Key: Type
+  Name: Тип
+  Searchable: 1
+- Input:
+    Required: 1
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Owner
+  Name: Владелец
+  Searchable: 1
+- Input:
+    Required: 0
+    Type: Integer
+    ValueDefault: 3
+    ValueMax: 6
+    ValueMin: 3
+  Key: Group
+  Name: Группа
+- Input:
+    Required: 1
+    Type: User
+  Key: Responsible
+  Name: Ответственный
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+  Key: EndDate
+  Name: Действителен до
+  Searchable: 1
+
+### CLASS: Spare_part ###
+---
+- Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: Vendor
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vendor
+  Name: Производитель
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: EquipmentType
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: EquipmentType
+  Name: Тип ЗИП
+  Searchable: 1
+- Input:
+    Type: TextArea
+  Key: Description
+  Name: Описание
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Size: 100
+    Type: Text
+  Key: SerialNum
+  Name: Серийный номер
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 1
+  CountMin: 0
+  Input:
+    Required: 1
+    Type: Date
+    YearPeriodFuture: 10
+    YearPeriodPast: 20
+  Key: WarrantyExpirationDate
+  Name: Срок истечения гарантии
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 1
+  CountMin: 0
+  Input:
+    Required: 1
+    Type: TextArea
+  Key: Note
+  Name: Заметка
+  Searchable: 1
+
+### CLASS: Passport ###
+---
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vladelec
+  Name: Владелец
+  Searchable: 1
+- Input:
+    Class: ITSM::ConfigItem::Passport::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: IDType
+  Name: Тип документа
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Required: 1
+    Size: 100
+    Type: Text
+  Key: FIOcyr
+  Name: ФИО кириллицей
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Required: 1
+    Size: 100
+    Type: Text
+  Key: IDnum
+  Name: Номер документа
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Required: 1
+    Size: 100
+    Type: Text
+  Key: FIOlat
+  Name: ФИО латиницей
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+    YearPeriodFuture: 1
+    YearPeriodPast: 100
+  Key: BirthDate
+  Name: День рождения
+  Searchable: 1
+- Input:
+    MaxLength: 50
+    Required: 1
+    Size: 50
+    Type: Text
+  Key: Issueorgan
+  Name: Кем выдано
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+    YearPeriodFuture: 1
+    YearPeriodPast: 30
+  Key: IssueDate
+  Name: Дата выдачи
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+    YearPeriodFuture: 30
+    YearPeriodPast: 1
+  Key: ExpDate
+  Name: Действителен до
+  Searchable: 1
+
+
+### CLASS: Medical ###
+---
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Reciever
+  Name: Получатель
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+  Key: IssueDate
+  Name: Дата выпуска
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+  Key: EndDate
+  Name: Действителен до
+  Searchable: 1
+
+
+### CLASS: People ###
+---
+- Key: FIO
+  Name: Сотрудник 
+  Input:
+    Required: 1
+    Type: User
+  Searchable: 1
+- Key: Position
+  Name: Должность
+  Searchable: 1
+  Input:
+    Type: CIClassReference
+    ReferencedCIClassName: Position
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Required: 0
+- Key: StartWork
+  Name: Работает с
+  CountDefault: 0
+  CountMax: 1
+  CountMin: 0
+  Input:
+    Type: Date
+    YearPeriodFuture: 0
+    YearPeriodPast: 20
+  Searchable: 1
+- Key: District
+  Name: Район проживания
+  Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+  Searchable: 1
+- Key: Email
+  Name: Имейл
+  Input:
+    Type: Text
+    Size: 50
+    Maxlength: 50
+    Required: 1
+- Key: Mobile
+  Name: Номер сотового
+  Input:
+    Type: Text
+    Size: 50
+    Maxlength: 50
+    Required: 1
+- Key: Auto
+  Name: Марка и номер авто
+  Input:
+    Type: Text
+    Size: 50
+    Maxlength: 50
+
+### CLASS: Position ###
+---
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: Department
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: JobTitle
+  Name: Структурное подразделение
+  Searchable: 1
+
+### CLASS: Certificate ###
+---
+- Input:
+    Class: ITSM::ConfigItem::Certificate::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: Type
+  Name: Тип сертификата
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Reciever
+  Name: Получатель
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+  Key: IssueDate
+  Name: Дата выдачи
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+  Key: EndDate
+  Name: Действителен до
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: Vendor
+    ReferencedCIClassReferenceAttributeKey: Name
+    Required: 1
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vendor
+  Name: Вендор
+  Searchable: 1
+- Input:
+    Type: TextArea
+  Key: Notes
+  Name: Заметки
+
+### CLASS: Computer ###
+---
+- Input:
+    MaxLength: 50
+    Required: 1
+    Size: 50
+    Type: Text
+  Key: Vendor
+  Name: Вендор
+  Searchable: 1
+- Input:
+    MaxLength: 50
+    Required: 1
+    Size: 50
+    Type: Text
+  Key: Model
+  Name: Модель
+  Searchable: 1
+- Input:
+    Type: TextArea
+  Key: Description
+  Name: Описание
+  Searchable: 1
+- Input:
+    Class: ITSM::ConfigItem::Computer::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: Type
+  Name: Тип
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: FIOV
+  Name: Владелец
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Required: 1
+    Size: 50
+    Type: Text
+  Key: SerialNumber
+  Name: Серийный номер
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Required: 1
+    Size: 50
+    Type: Text
+  Key: OperatingSystem
+  Name: Операционная система
+- CountMax: 16
+  Input:
+    MaxLength: 100
+    Required: 1
+    Size: 50
+    Type: Text
+  Key: CPU
+  Name: CPU
+- CountMax: 10
+  Input:
+    MaxLength: 100
+    Required: 1
+    Size: 50
+    Type: Text
+  Key: Ram
+  Name: Оперативная память
+- CountMax: 10
+  Input:
+    Class: ITSM::ConfigItem::Computer::HDDType
+    Required: 1
+    Type: GeneralCatalog
+  Key: HardDiskType
+  Name: Тип HDD
+  Sub:
+  - Input:
+      MaxLength: 10
+      Required: 1
+      Size: 20
+      Type: Text
+    Key: HardDiskCapacity
+    Name: Объем HDD
+- Input:
+    Class: ITSM::ConfigItem::Computer::RS232
+    Type: GeneralCatalog
+  Key: RS232
+  Name: RS232-порт
+- CountDefault: 0
+  CountMax: 20
+  CountMin: 0
+  Input:
+    MaxLength: 40
+    Size: 40
+    Type: Text
+  Key: IPAddress
+  Name: IP Address
+  Searchable: 1
+- CountDefault: 0
+  CountMin: 0
+  Input:
+    Required: 1
+    Type: Date
+    YearPeriodFuture: 10
+    YearPeriodPast: 20
+  Key: InstallDate
+  Name: Install Date
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+    YearPeriodFuture: 10
+    YearPeriodPast: 20
+  Key: ExpDate
+  Name: Дата демонтажа
+  Searchable: 1
+- CountDefault: 0
+  CountMin: 0
+  Input:
+    Required: 1
+    Type: TextArea
+  Key: Note
+  Name: Заметки
+  Searchable: 1
+
+
+### CLASS: Department ###
+---
+- Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+    Required: 1
+  Key: Company
+  Name: Компания
+  Searchable: 1
+
+### CLASS: Hardware ###
+---
+- Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: Model
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Model
+  Name: Модель
+  Searchable: 1
+- Input:
+    Type: Customer
+  Key: Owner
+  Name: Владелец
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+  Key: SerialNumber
+  Name: Серийный №
+  Searchable: 1
+- Input:
+    Type: Date
+    YearPeriodFuture: 10
+    YearPeriodPast: 20
+  Key: WarrantyExpirationDate
+  Name: Гарантия до
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 1
+  CountMin: 0
+  Input:
+    Required: 1
+    Type: Date
+    YearPeriodFuture: 10
+    YearPeriodPast: 20
+  Key: InstallDate
+  Name: Дата установки
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 1
+  CountMin: 0
+  Input:
+    Required: 1
+    Type: TextArea
+  Key: Note
+  Name: Заметки
+  Searchable: 1
+
+
+### CLASS: Location ###
+---
+- Input:
+    Class: ITSM::ConfigItem::Location::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: Type
+  Name: Type
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: CustomerUserCompany
+  Key: CustomerUserCompany
+  Name: Компания - клиент
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+  Key: Phone
+  Name: Рабочий телефон
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+  Key: Fax
+  Name: Fax
+  Searchable: 1
+- Input:
+    Name: City
+    Translation: 1
+    Type: DynamicField
+  Key: City
+  Name: City
+  Searchable: 1
+- Input:
+    Type: TextArea
+  Key: Address
+  Name: Address
+  Searchable: 1
+- CountDefault: 0
+  CountMin: 0
+  Input:
+    Required: 1
+    Type: TextArea
+  Key: Note
+  Name: Note
+  Searchable: 1
+- CountMax: 10
+  Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+  Key: ContactPerson
+  Name: Контактное лицо
+  Sub:
+  - Input:
+      MaxLength: 40
+      Size: 40
+      Type: Text
+    Key: Email
+    Name: Имейл
+  - Input:
+      MaxLength: 20
+      Size: 20
+      Type: Text
+    Key: WorkPhone
+    Name: Рабочий номер
+  - CountMax: 5
+    Input:
+      MaxLength: 20
+      Size: 20
+      Type: Text
+    Key: MobilePhone
+    Name: Мобильный номер
+  - Input:
+      MaxLength: 50
+      Size: 50
+      Type: Text
+    Key: Position
+    Name: Должность
+
+
+### CLASS: Metrics ###
+---
+- Input:
+    Class: ITSM::ConfigItem::Metrics::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: MetricsType
+  Name: Тип метрики
+  Searchable: 1
+- Input:
+    Class: ITSM::ConfigItem::MetricsProtocol::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: ProtocolType
+  Name: Тип протокола
+  Searchable: 1
+- CountDefault: 1
+  CountMax: 50
+  CountMin: 1
+  Input:
+    Class: ITSM::ConfigItem::Hardware::Model
+    Translation: 1
+    Type: GeneralCatalog
+  Key: Hardware
+  Name: Модель оборудования
+  Searchable: 1
+- Input:
+    Class: ITSM::ConfigItem::MetricsData::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: MetricsDataType
+  Name: Тип данных
+  Searchable: 1
+- Input:
+    Class: ITSM::ConfigItem::MetricsCritLevel::Class
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: MetricsCritLevel
+  Name: Класс критичности
+  Searchable: 1
+
+
+### CLASS: Docs ###
+---
+- Input:
+    Class: ITSM::ConfigItem::Docs::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: DocsType
+  Name: Тип документа
+  Searchable: 1
+- CountMax: 1
+  CountMin: 1
+  Input:
+    MaxLength: 50
+    Size: 50
+    Type: CIAttachment
+  Key: Attachment
+  Name: Документ
+  Searchable: 1
+
+
+### CLASS: Tools ###
+---
+- Input:
+    Class: ITSM::ConfigItem::Tools::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: ToolsType
+  Name: Тип инструмента
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: Vendor
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vendor
+  Name: Vendor
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+  Key: SerialNumber
+  Name: Serial Number
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vladelec
+  Name: Владелец
+  Searchable: 1
+- CountDefault: 0
+  CountMin: 0
+  Input:
+    Type: TextArea
+  Key: Notes
+  Name: Заметки
+- Input:
+    Type: Text
+  Key: Object
+  Name: Объект
+  Searchable: 1
+
+### CLASS: Vendor ###
+---
+- Input:
+    MaxLength: 200
+    Size: 100
+    Type: TextLink
+    URL: http://www.example.com/<VALUE>
+  Key: TextLink
+  Name: Text Link
+  Searchable: 1
+
+
+### CLASS: Job ###
+---
+- Input:
+    Class: ITSM::ConfigItem::Job::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: JobType
+  Name: Тип работы
+  Searchable: 1
+- Input:
+    ReferencedServiceLinkDirection: Normal
+    ReferencedServiceLinkType: RelevantTo
+    Type: ServiceReference
+  Key: AssignedService
+  Name: Относится к сервису
+  Searchable: 1
+- Input:
+    Class: ITSM::ConfigItem::People::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: EngineerType
+  Name: Тип инженера
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 10
+  CountMin: 0
+  Input:
+    Class: ITSM::ConfigItem::Certificate::Type
+    Translation: 1
+    Type: GeneralCatalog
+  Key: CertificateType
+  Name: Сертификат
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 10
+  CountMin: 0
+  Input:
+    Class: ITSM::ConfigItem::Keys::Type
+    Translation: 1
+    Type: GeneralCatalog
+  Key: KeysType
+  Name: Тип ключа
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 30
+  CountMin: 0
+  Input:
+    Class: ITSM::ConfigItem::Tools::Type
+    Translation: 1
+    Type: GeneralCatalog
+  Key: ToolsType
+  Name: Инструмент
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 20
+  CountMin: 0
+  Input:
+    Class: ITSM::ConfigItem::MeasuringTools::Type
+    Translation: 1
+    Type: GeneralCatalog
+  Key: MeasuringToolsType
+  Name: КИП
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 30
+  CountMin: 0
+  Input:
+    Class: ITSM::ConfigItem::Approvals::Type
+    Translation: 1
+    Type: GeneralCatalog
+  Key: ApprovalsType
+  Name: Допуски
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 5
+  CountMin: 0
+  Input:
+    Class: ITSM::ConfigItem::Identifications::Type
+    Translation: 1
+    Type: GeneralCatalog
+  Key: IdentificationsType
+  Name: Идентификационные документы
+  Searchable: 1
+- CountDefault: 0
+  CountMax: 40
+  CountMin: 0
+  Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: Metrics
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Metrics
+  Name: Используемые метрики
+  Searchable: 1
+
+
+### CLASS: Keys ###
+---
+- Input:
+    Class: ITSM::ConfigItem::KEYS::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: KeysType
+  Name: Тип ключа
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: Computer
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Computer
+  Name: Компьютер
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: Vendor
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vendor
+  Name: Вендор
+  Searchable: 1
+- Input:
+    MaxLength: 150
+    Size: 150
+    Type: Text
+    Required: 0
+  Key: ToModels
+  Name: К каким моделям применим
+  Searchable: 0
+- Input:
+    Type: Date
+    YearPeriodFuture: 1
+    YearPeriodPast: 5
+  Key: KeysActivationDay
+  Name: Дата активации
+  Searchable: 1
+- Input:
+    Type: Date
+    YearPeriodFuture: 5
+    YearPeriodPast: 5
+  Key: KeysValidtillDate
+  Name: Дата окончания активации
+  Searchable: 1
+- Input:
+    MaxLength: 10
+    Size: 10
+    Type: Text
+    Required: 0
+  Key: Price
+  Name: Цена
+- Input:
+    Required: 0
+    Type: TextArea
+  Key: Note
+  Name: Процедура установки
+  Searchable: 0
+
+### CLASS: MeasuringTools ###
+---
+- Input:
+    Class: ITSM::ConfigItem::MeasuringTools::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: ToolsType
+  Name: Тип прибора
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: Vendor
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vendor
+  Name: Vendor
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vladelec
+  Name: Владелец
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+  Key: SerialNumber
+  Name: Serial Number
+  Searchable: 1
+- CountDefault: 0
+  CountMin: 0
+  Input:
+    Type: TextArea
+  Key: Notes
+  Name: Заметки
+- Input:
+    Type: Text
+  Key: Object
+  Name: Объект
+  Searchable: 1
+
+### CLASS: EquipmentType ###
+---
+- Input:
+    Type: TextArea
+  Key: Notes
+  Name: Заметки
+  Searchable: 1
+
+### CLASS: Model ###
+---
+- Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: Vendor
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vendor
+  Name: Производитель
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: EquipmentType
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: EquipmentType
+  Name: Тип оборудования
+  Searchable: 1
+- Input:
+    Type: TextArea
+  Key: Description
+  Name: Описание
+  Searchable: 1
+- CountMax: 10
+  Input:
+    Required: 0
+    Type: Integer
+    ValueMax: 10
+    ValueMin: 1
+  Key: LifeYear
+  Name: Год цикла
+  Sub:
+  - CountMax: 100
+    Input:
+      MaxLength: 40
+      Size: 40
+      Type: Text
+    Key: PartNumber
+    Name: Партномер
+    Sub:
+    - Input:
+        MaxLength: 100
+        Size: 100
+        Type: Text
+      Key: ZIPDescription
+      Name: Описание ЗИП
+    - Input:
+        Type: Integer
+        ValueMax: 100
+        ValueMin: 1
+      Key: RequiredQnt
+      Name: Необходимое количество
+
+### CLASS: UPS ###
+---
+- Key: UPSInfo
+  Name: Информация об ИБП
+  Input:
+    Type: Dummy
+  Sub:
+  - Key: Model
+    Name: Модель ИБП
+    Searchable: 1
+    Input:
+      ReferencedCIClassLinkDirection: Reverse
+      ReferencedCIClassLinkType: RelevantTo
+      ReferencedCIClassName: Model
+      ReferencedCIClassReferenceAttributeKey: Name
+      SearchInputType: AutoComplete
+      Type: CIClassReference
+  - Key: SerialNumber
+    Name: Серийный номер ИБП
+    Searchable: 1
+    Input:
+      MaxLength: 100
+      Size: 50
+      Type: Text
+  - Key: WarrantyExpirationDate
+    Name: Гарантия до
+    Searchable: 1
+    Input:
+      Type: Date
+      YearPeriodFuture: 10
+      YearPeriodPast: 20
+  - Key: InstallDate
+    Name: Установлен
+    Searchable: 1
+    Input:
+      Required: 1
+      Type: Date
+      YearPeriodFuture: 10
+      YearPeriodPast: 20
+  - Key: Note
+    Name: Заметки
+    Searchable: 1
+    Input:
+      Required: 0
+      Type: TextArea
+  - Key: InvertorialNumber
+    Name: Инвентарный номер
+    Searchable: 1
+    Input:
+      MaxLength: 50
+      Required: 0
+      Size: 50
+      Type: Text
+  - Key: LoadPercentage
+    Name: Процент загрузки ИБП
+    Searchable: 0
+    Input:
+      Type: Text
+      Required: 1
+      Size: 3
+      MaxLength: 3
+      RegEx: ^\d+$
+      RegExErrorMessage: Нужно вводить только цифры
+      ValueMin: 1
+      ValueMax: 999
+      ValueDefault: 1
+- Key: CurrentMetrics
+  Name: Уставки
+  Searchable: 0
+  Input:
+    Type: Dummy
+  Sub:
+  - Key: InputVoltage
+    Name: Входные напряжения
+    Searchable: 0
+    Input:
+      Type: Dummy
+    Sub:
+    - Key: InputPHNum
+      Name: Номер фазы
+      Searchable: 0
+      Input:
+        Type: GeneralCatalog
+        Class: ITSM::ConfigItem::UPS::PHNum
+        ValueDefault: L1
+      CountMin: 1
+      CountMax: 3
+      CountDefault: 3
+      Sub:
+      - Key: InputPHVoltage
+        Name: Напряжение на фазе (V)
+        Searchable: 0
+        Input:
+          Type: Text
+          MaxLength: 3
+          Required: 0
+          RegEx: ^\d+$
+          RegExErrorMessage: Нужно вводить только цифры
+          ValueMin: 1
+          ValueMax: 999
+          ValueDefault: 230
+    - Key: InputFreq
+      Name: Входная частота (Hz)
+      Searchable: 0
+      Input:
+        Type: Text
+        MaxLength: 3
+        Required: 0
+        RegEx: ^\d+$
+        RegExErrorMessage: Нужно вводить только цифры
+        ValueMin: 1
+        ValueMax: 999
+        ValueDefault: 50
+  - Key: BypassVoltage
+    Name: Напряжения байпаса
+    Searchable: 0
+    Input:
+      Type: Dummy
+    Sub:
+    - Key: BypassPHNum
+      Name: Номер фазы
+      Searchable: 0
+      Input:
+        Type: GeneralCatalog
+        Class: ITSM::ConfigItem::UPS::PHNum
+        ValueDefault: L1
+      CountMin: 1
+      CountMax: 3
+      CountDefault: 3
+      Sub:
+      - Key: BypassPHVoltage
+        Name: Напряжение на фазе (V)
+        Searchable: 0
+        Input:
+          Type: Text
+          MaxLength: 3
+          Required: 0
+          RegEx: \d+$
+          RegExErrorMessage: Нужно вводить только цифры
+          ValueMin: 1
+          ValueMax: 999
+          ValueDefault: 230
+    - Key: BypassFreq
+      Name: Частота на байпасе (Hz)
+      Searchable: 0
+      Input:
+        Type: Text
+        MaxLength: 3
+        Required: 0
+        RegEx: \d+$
+        RegExErrorMessage: Нужно вводить только цифры
+        ValueMin: 1
+        ValueMax: 999
+        ValueDefault: 50
+  - Key: OutputVoltage
+    Name: Выходные напряжения
+    Searchable: 0
+    Input:
+      Type: Dummy
+    Sub:
+    - Key: OutputPHNum
+      Name: Номер фазы
+      Searchable: 0
+      Input:
+        Type: GeneralCatalog
+        Class: ITSM::ConfigItem::UPS::PHNum
+        ValueDefault: L1
+      CountMin: 1
+      CountMax: 3
+      CountDefault: 3
+      Sub:
+      - Key: OutputPHVoltage
+        Name: Напряжение на фазе (V)
+        Searchable: 0
+        Input:
+          Type: Text
+          MaxLength: 3
+          Required: 0
+          RegEx: \d+$
+          RegExErrorMessage: Нужно вводить только цифры
+          ValueMin: 1
+          ValueMax: 999
+          ValueDefault: 230
+    - Key: OutputFreq
+      Name: Частота на выходе
+      Searchable: 0
+      Input:
+        Type: Text
+        MaxLength: 3
+        Required: 0
+        RegEx: \d+$
+        RegExErrorMessage: Нужно вводить только цифры
+        ValueMin: 1
+        ValueMax: 999
+        ValueDefault: 50
+  - Key: OutputCurrent
+    Name: Ток на выходе ИБП
+    Searchable: 0
+    Input:
+      Type: Dummy
+    Sub:
+    - Key: OutputPhNumCurrent
+      Name: Номер фазы
+      Searchable: 0
+      Input:
+        Type: GeneralCatalog
+        Class: ITSM::ConfigItem::UPS::PHNum
+        ValueDefault: L1
+      CountMin: 1
+      CountMax: 3
+      CountDefault: 3
+      Sub:
+      - Key: OutputCurrentByPH
+        Name: Значение тока на выходе (A)
+        Searchable: 0
+        Input:
+          Type: Text
+          MaxLength: 3
+          Required: 0
+          RegEx: \d+$
+          RegExErrorMessage: Нужно вводить только цифры
+          ValueMin: 1
+          ValueMax: 999
+          ValueDefault: 1
+- Key: LocationInfo
+  Name: Месторасположение ИБП
+  Searchable: 0
+  Input:
+    Type: Dummy
+  Sub:
+  - Key: LocationType
+    Name: Тип помещения ИБП
+    Searchable: 0
+    Input:
+      Type: GeneralCatalog
+      Class: ITSM::ConfigItem::UPS::LocationType
+      Required: 1
+  - Key: LocationStatus
+    Name: Состояние помещения
+    Searchable: 0
+    Input:
+      Type: GeneralCatalog
+      Class: ITSM::ConfigItem::UPS::LocationStatus
+      Required: 1
+  - Key: LocationConditioning
+    Name: Наличие системы охлаждения
+    Searchable: 0
+    Input:
+      Type: Text
+      Required: 1
+      Size: 10
+      MaxLength: 10
+  - Key: LocationTemp
+    Name: Температура помещения ИБП
+    Searchable: 0
+    Input:
+      Type: Text
+      Size: 3
+      MaxLength: 3
+      CountMin: 5
+      CountMax: 50
+      CountDefault: 21
+      Regex: \d+$
+      RegExErrorMessage: Нужно вводить только цифры
+
+### CLASS: BATTERY ###
+---
+- Key: UPS
+  Name: ИБП
+  Searchable: 1
+  Input:
+    Type: CIClassReference
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: UPS
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+- Key: BatteryProducer
+  Name: Производитель батарей
+  Searchable: 1
+  Input:
+    Type: Text
+    Required: 1
+    Size: 50
+    MaxLength: 100
+- Key: BatteryModel
+  Name: Модель батарей
+  Searchable: 1
+  Input:
+    Type: Text
+    Required: 1
+    Size: 50
+    MaxLength: 100
+- Key: BatteryVoltage
+  Name: Напряжение батарей (Вольт)
+  Searchable: 1
+  Input:
+    Type: Text
+    Required: 1
+    Size: 3
+    MaxLength: 3
+    RegEx: ^\d+$
+    RegExErrorMessage: Нужно вводить только цифры
+    ValueMin: 1
+    ValueMax: 999
+    ValueDefault: 12
+- Key: BatteryCapacity
+  Name: Емкость батарей (Ампер/час)
+  Searchable: 1
+  Input:
+    Type: Text
+    Required: 1
+    Size: 3
+    MaxLength: 3
+    RegEx: ^\d+$
+    RegExErrorMessage: Нужно вводить только цифры
+    ValueMin: 1
+    ValueMax: 999
+    ValueDefault: 9
+- Key: MeasuringRate
+  Name: Коэффициент измерения
+  Searchable: 0
+  Input:
+    Type: Text
+    Size: 4
+- Key: ChargeCurrent
+  Name: Ток заряда батарей (A)
+  Searchable: 0
+  Input:
+    Type: Text
+    Required: 0
+    Size: 4
+    MaxLength: 4
+    RegEx: ^\d+$
+    RegExErrorMessage: Нужно вводить только цифры
+    ValueMin: 1
+    ValueMax: 9999
+    ValueDefault: 1
+- Key: DischargeCurrent
+  Name: Ток разряда батарей (A)
+  Searchable: 0
+  Input:
+    Type: Text
+    Required: 0
+    Size: 4
+    MaxLength: 4
+    RegEx: ^\d+$
+    RegExErrorMessage: Нужно вводить только цифры
+    ValueMin: 1
+    ValueMax: 9999
+    ValueDefault: 1
+- Key: ChargeVoltage
+  Name: Напряжение заряда батарей (V)
+  Searchable: 0
+  Input:
+    Type: Text
+    Required: 0
+    Size: 4
+    MaxLength: 4
+    RegEx: ^\d+$
+    RegExErrorMessage: Нужно вводить только цифры
+    ValueMin: 1
+    ValueMax: 9999
+    ValueDefault: 460
+- Key: AkbLocation
+  Name: Расположение АКБ
+  Input:
+    Type: Dummy
+  Sub:
+  - Key: BatteryLineNum
+    Name: Номер батарейной линейки
+    Searchable: 0
+    Input:
+      Type: Text
+      Required: 1
+      Size: 2
+      MaxLength: 2
+      RegEx: ^\d+$
+      RegExErrorMessage: Нужно вводить только цифры
+      ValueMin: 0
+      ValueMax: 99
+      ValueDefault: 0
+    CountMin: 0
+    CountMax: 99
+    CountDefault: 0
+    Sub:
+    - Key: BatteryModuleNum
+      Name: Номер батарейной полки или серийный номер модуля
+      Searchable: 0
+      Input:
+        Type: Text
+        Required: 1
+        Size: 50
+        MaxLength: 50
+      CountMin: 1
+      CountMax: 99
+      CountDefault: 1  
+      Sub:
+      - Key: BatteryNum
+        Name: Номер АКБ
+        Input:
+          Type: Text
+          Required: 1
+          Size: 2
+          ValueMin: 0
+          ValueMax: 99
+          ValueDefault: 0
+        CountMin: 1
+        CountMax: 99
+        CountDefault: 1
+        Sub:
+        - Key: AkbVoltage
+          Name: Напряжение АКБ (Вольт)
+          Input:
+            Type: Text
+            Size: 3
+            Required: 1
+            ValueMin: 0
+            ValueMax: 999
+            ValueDefault: 12
+        - Key: AkbCapacity
+          Name: Емкость АКБ (Ампер/час)
+          Input:
+            Type: Text
+            Size: 3
+            Required: 1
+            ValueMin: 0
+            ValueMax: 999
+            ValueDefault: 7.2
+        - Key: AkbDecision
+          Name: Заключение по АКБ
+          Input:
+            Type: GeneralCatalog
+            Class: ITSM::ConfigItem::UPS::AkbDecision
+            Required: 1
+
+### CLASS: CAPACITOR ###
+---
+- Key: UPS
+  Name: ИБП
+  Searchable: 0
+  Input:
+    ReferencedCIClassLinkDirection: Reverse
+    ReferencedCIClassLinkType: RelevantTo
+    ReferencedCIClassName: UPS
+    ReferencedCIClassReferenceAttributeKey: Name
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+- Key: CapacitorType
+  Name: Тип конденсатора
+  Searchable: 1
+  Input:
+    Type: GeneralCatalog
+    Class: ITSM::ConfigItem::CAPACITOR::Type
+    Required: 1
+- Key: CapacitorVoltage
+  Name: Напряжение конденсатора (V)
+  Searchable: 1
+  Input:
+    Type: Text
+    Required: 1
+    Size: 3
+- Key: CapacitorUncertainty
+  Name: Погрешность конденсатора +/- (%)
+  Searchable: 0
+  Input:
+    Type: Text
+    Required: 1
+    MaxLength: 2
+    RegEx: ^\d+$
+    RegExErrorMessage: Нужно вводить только цифры
+    ValueMin: 1
+    ValueMax: 99
+- Key: CapacitorNum
+  Name: Номер конденсатора
+  Searchable: 0
+  Input:
+    Type: Text
+    Required: 1
+    MaxLength: 3
+    RegEx: ^\d+$
+    RegExErrorMessage: Нужно вводить только цифры
+    ValueMin: 1
+    ValueMax: 999
+  CountMin: 1
+  CountMax: 999
+  CountDefault: 1
+  Sub:
+  - Key: CapacitorCapacity
+    Name: Емкость конденсатора (µF)
+    Searchable: 1
+    Input:
+      Type: Text
+      Required: 1
+      Size: 3
+  - Key: CapacitorDecision
+    Name: Заключение инженера по конденсатору
+    Searchable: 1
+    Input:
+      Type: GeneralCatalog
+      Class: ITSM::ConfigItem::CAPACITOR::Decision
+      Required: 1
+
+### CLASS: СИЗ ###
+---
+- Input:
+    Class: ITSM::ConfigItem::PPE::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: PPEType
+  Name: Тип СИЗ
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vladelec
+  Name: Владелец
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+  Key: IssueDate
+  Name: Дата приобретения
+  Searchable: 1
+- Input:
+    Required: 1
+    Type: Date
+  Key: EndDate
+  Name: Действителен до
+  Searchable: 1
+- Input:
+    MaxLength: 10
+    Size: 50
+    Type: Text
+  Key: Size
+  Name: Размер
+  Searchable: 1
+- CountDefault: 0
+  CountMin: 0
+  Input:
+    Type: TextArea
+  Key: Notes
+  Name: Заметки
+
