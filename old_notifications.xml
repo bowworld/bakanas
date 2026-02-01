@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+
+<resultset statement="SELECT * FROM ps_ci_notifications" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <row>
+	<field name="name">1 месяц до истечения ключа на Eaton</field>
+	<field name="class_id">281</field>
+	<field name="valid_id">1</field>
+	<field name="events">{&quot;Event.###KeysValidtillDate.TimePoint&quot;:&quot;1&quot;,&quot;Event.###KeysValidtillDate.TimePointStart&quot;:&quot;Last&quot;,&quot;Event.###KeysValidtillDate.SearchType&quot;:&quot;TimePoint&quot;,&quot;Event.###KeysValidtillDate.TimePointFormat&quot;:&quot;month&quot;}</field>
+	<field name="cron">{}</field>
+	<field name="filter">{&quot;Filter.###Vendor&quot;:&quot;EATON&quot;}</field>
+	<field name="recipients">{&quot;Recipient.Agents&quot;:[&quot;55&quot;,&quot;11&quot;,&quot;2&quot;]}</field>
+	<field name="subject">Истекает срок лицензии на ПО Eaton</field>
+	<field name="body">Внимание!
+Истекает срок лицензии на ПО EATON: &lt;OTRS_CI_Name&gt;.
+Лицензия действительна до: &lt;OTRS_CI_XML_KeysValidtillDate.[1]&gt;.
+Лицензия установлена на компьютере: &lt;OTRS_CI_XML_Computer.[1]&gt;.</field>
+	<field name="max_mail">daily</field>
+	<field name="comments" xsi:nil="true" />
+	<field name="eventname" xsi:nil="true" />
+	<field name="create_time">2022-09-13 16:02:31</field>
+	<field name="create_by">2</field>
+	<field name="change_time">2022-09-13 16:02:31</field>
+	<field name="change_by">2</field>
+  </row>
+
+  <row>
+	<field name="name">Истек срок медсправки для офис-менеджера</field>
+	<field name="class_id">198</field>
+	<field name="valid_id">1</field>
+	<field name="events">{&quot;Event.###EndDate.SearchType&quot;:&quot;TimePoint&quot;,&quot;Event.###EndDate.TimePoint&quot;:&quot;1&quot;,&quot;Event.###EndDate.TimePointFormat&quot;:&quot;week&quot;,&quot;Event.###EndDate.TimePointStart&quot;:&quot;Before&quot;}</field>
+	<field name="cron">{}</field>
+	<field name="filter">{&quot;Filter.DeplStateIDs&quot;:[&quot;151&quot;]}</field>
+	<field name="recipients">{&quot;Recipient.Agents&quot;:[&quot;21&quot;]}</field>
+	<field name="subject">Истек срок медсправки для &lt;OTRS_CI_XML_Reciever.[1]&gt;</field>
+	<field name="body">Внимание,
+истек срок медицинской справки, оформленной на &lt;OTRS_CI_XML_Reciever.[1]&gt;.
+Медицинская справка была действительна до: &lt;OTRS_CI_XML_EndDate.[1]&gt;
+
+Пожалуйста,
+не забудьте направить сотрудника на повторный медицинский осмотр!
+------------------
+OTRS Vicom Plus</field>
+	<field name="max_mail">weekly</field>
+	<field name="comments">Истек срок медицинской справки для офис-менеджера</field>
+	<field name="eventname" xsi:nil="true" />
+	<field name="create_time">2021-10-07 11:14:02</field>
+	<field name="create_by">2</field>
+	<field name="change_time">2021-10-08 15:47:22</field>
+	<field name="change_by">2</field>
+  </row>
+
+  <row>
+	<field name="name">Истекает срок идентификационного документа</field>
+	<field name="class_id">184</field>
+	<field name="valid_id">1</field>
+	<field name="events">{&quot;Event.###ExpDate.TimePointStart&quot;:&quot;Last&quot;,&quot;Event.###ExpDate.SearchType&quot;:&quot;TimePoint&quot;,&quot;Event.###ExpDate.TimePoint&quot;:&quot;1&quot;,&quot;Event.###ExpDate.TimePointFormat&quot;:&quot;month&quot;}</field>
+	<field name="cron">{}</field>
+	<field name="filter">{&quot;Filter.DeplStateIDs&quot;:[&quot;151&quot;]}</field>
+	<field name="recipients">{&quot;Recipient.Roles&quot;:[&quot;12&quot;]}</field>
+	<field name="subject">Истекает срок действия идентификацонного документа для &lt;OTRS_CI_XML_Vladelec.[1]&gt;</field>
+	<field name="body">&lt;OTRS_CI_XML_ExpDate.[1]&gt; истекает срок действия идентификационного документа, оформленного на &lt;OTRS_CI_XML_Vladelec.[1]&gt;.
+
+Пожалуйста,
+Заблаговременно направьте сотрудника на замену идентификационного документа.
+-----------------
+OTRS Vicom Plus</field>
+	<field name="max_mail">daily</field>
+	<field name="comments">за месяц до истечения срока</field>
+	<field name="eventname" xsi:nil="true" />
+	<field name="create_time">2021-10-08 10:08:20</field>
+	<field name="create_by">2</field>
+	<field name="change_time">2022-04-14 10:30:25</field>
+	<field name="change_by">2</field>
+  </row>
+
+  <row>
+	<field name="name">Истекает срок лицензий ПО Schneider Electric</field>
+	<field name="class_id">281</field>
+	<field name="valid_id">1</field>
+	<field name="events">{&quot;Event.###KeysValidtillDate.TimePoint&quot;:&quot;15&quot;,&quot;Event.###KeysValidtillDate.TimePointStart&quot;:&quot;Last&quot;,&quot;Event.###KeysValidtillDate.SearchType&quot;:&quot;TimePoint&quot;,&quot;Event.###KeysValidtillDate.TimePointFormat&quot;:&quot;day&quot;}</field>
+	<field name="cron">{}</field>
+	<field name="filter">{&quot;Filter.###Vendor&quot;:&quot;Schneider Electric&quot;}</field>
+	<field name="recipients">{&quot;Recipient.Agents&quot;:[&quot;55&quot;,&quot;11&quot;,&quot;2&quot;]}</field>
+	<field name="subject">Истекает срок лицензии ПО Schneider Electric</field>
+	<field name="body">Истекает срок лицензии на ПО Schneider Electric:
+&lt;OTRS_CI_Name&gt;.
+Лицензия действительна до: &lt;OTRS_CI_XML_KeysValidtillDate.[1]&gt;.
+Лицензия установлена на компьютере: &lt;OTRS_CI_XML_Computer.[1]&gt;.</field>
+	<field name="max_mail">daily</field>
+	<field name="comments" xsi:nil="true" />
+	<field name="eventname" xsi:nil="true" />
+	<field name="create_time">2022-09-12 17:08:58</field>
+	<field name="create_by">2</field>
+	<field name="change_time">2022-09-13 15:58:17</field>
+	<field name="change_by">2</field>
+  </row>
+
+  <row>
+	<field name="name">Медицинская справка - за неделю до истечения срока для ответственного</field>
+	<field name="class_id">198</field>
+	<field name="valid_id">1</field>
+	<field name="events">{&quot;Event.###EndDate.SearchType&quot;:&quot;TimePoint&quot;,&quot;Event.###EndDate.TimePoint&quot;:&quot;1&quot;,&quot;Event.###EndDate.TimePointFormat&quot;:&quot;week&quot;,&quot;Event.###EndDate.TimePointStart&quot;:&quot;Last&quot;}</field>
+	<field name="cron">{}</field>
+	<field name="filter">{&quot;Filter.DeplStateIDs&quot;:[&quot;151&quot;]}</field>
+	<field name="recipients">{&quot;Recipient.Roles&quot;:[&quot;12&quot;]}</field>
+	<field name="subject">Срок медсправки для &lt;OTRS_CI_XML_Reciever.[1]&gt; истекает через неделю!</field>
+	<field name="body">Внимание,
+Медицинская справка для &lt;OTRS_CI_XML_Reciever.[1]&gt; действительна до: &lt;OTRS_CI_XML_EndDate.[1]&gt;.
+
+Пожалуйста,
+не забудьте заблаговременно направить сотрудника для прохождения медицинского осмотра!
+------------------
+OTRS Vicom Plus.</field>
+	<field name="max_mail">weekly</field>
+	<field name="comments">медицинская справка за неделю до истечения срока для ответственного</field>
+	<field name="eventname" xsi:nil="true" />
+	<field name="create_time">2021-10-08 15:46:36</field>
+	<field name="create_by">2</field>
+	<field name="change_time">2021-10-08 15:46:36</field>
+	<field name="change_by">2</field>
+  </row>
+
+  <row>
+	<field name="name">Разрешения - за семь дней до истечения срока</field>
+	<field name="class_id">141</field>
+	<field name="valid_id">2</field>
+	<field name="events">{&quot;Event.###EndDate.TimePointFormat&quot;:&quot;week&quot;,&quot;Event.###EndDate.TimePoint&quot;:&quot;1&quot;,&quot;Event.###EndDate.TimePointStart&quot;:&quot;Last&quot;,&quot;Event.###EndDate.SearchType&quot;:&quot;TimePoint&quot;}</field>
+	<field name="cron">{}</field>
+	<field name="filter">{&quot;Filter.DeplStateIDs&quot;:[&quot;151&quot;,&quot;29&quot;]}</field>
+	<field name="recipients">{&quot;Recipient.Agents&quot;:[&quot;55&quot;]}</field>
+	<field name="subject">Истекает срок действия разрешения типа &lt;OTRS_CI_XML_Type.[1]&gt; для &lt;OTRS_CI_XML_Owner.[1]&gt;</field>
+	<field name="body">&lt;OTRS_CI_XML_Responsible.[1]&gt;,
+
+Истекает срок действия разрешения типа - &lt;OTRS_CI_XML_Type.[1]&gt;,
+оформленное на &lt;OTRS_CI_XML_Owner.[1]&gt;.
+Разрешение действительно до &lt;OTRS_CI_XML_EndDate.[1]&gt;
+----------------
+OTRS Vicom Plus</field>
+	<field name="max_mail">daily</field>
+	<field name="comments">разрешения - за семь дней до истечения срока</field>
+	<field name="eventname" xsi:nil="true" />
+	<field name="create_time">2021-10-08 15:44:37</field>
+	<field name="create_by">2</field>
+	<field name="change_time">2023-11-27 00:13:36</field>
+	<field name="change_by">55</field>
+  </row>
+
+  <row>
+	<field name="name">Разрешения - истек срок</field>
+	<field name="class_id">141</field>
+	<field name="valid_id">2</field>
+	<field name="events">{&quot;Event.###EndDate.TimePointFormat&quot;:&quot;day&quot;,&quot;Event.###EndDate.TimePoint&quot;:&quot;1&quot;,&quot;Event.###EndDate.TimePointStart&quot;:&quot;Before&quot;,&quot;Event.###EndDate.SearchType&quot;:&quot;TimePoint&quot;}</field>
+	<field name="cron">{}</field>
+	<field name="filter">{&quot;Filter.DeplStateIDs&quot;:[&quot;151&quot;]}</field>
+	<field name="recipients">{&quot;Recipient.Agents&quot;:[&quot;55&quot;]}</field>
+	<field name="subject">Истек срок действия &lt;OTRS_CI_XML_Type.[1]&gt; для &lt;OTRS_CI_XML_Owner.[1]&gt;</field>
+	<field name="body">&lt;OTRS_CI_XML_Responsible.[1]&gt;,
+
+Истек срок действия для разрешения типа - &lt;OTRS_CI_XML_Type.[1]&gt;,
+оформленное на агента &lt;OTRS_CI_XML_Owner.[1]&gt;.
+Срок действия до - &lt;OTRS_CI_XML_EndDate.[1]&gt;.
+-------------------
+OTRS Vicom Plus</field>
+	<field name="max_mail">weekly</field>
+	<field name="comments">прошло более одного дня</field>
+	<field name="eventname" xsi:nil="true" />
+	<field name="create_time">2021-10-06 13:08:55</field>
+	<field name="create_by">2</field>
+	<field name="change_time">2023-11-27 00:13:18</field>
+	<field name="change_by">55</field>
+  </row>
+
+  <row>
+	<field name="name">Тюнеры ABB за две недели до окончания</field>
+	<field name="class_id">281</field>
+	<field name="valid_id">1</field>
+	<field name="events">{&quot;Event.###KeysValidtillDate.SearchType&quot;:&quot;TimePoint&quot;,&quot;Event.###KeysValidtillDate.TimePointStart&quot;:&quot;Last&quot;,&quot;Event.###KeysValidtillDate.TimePoint&quot;:&quot;15&quot;,&quot;Event.###KeysValidtillDate.TimePointFormat&quot;:&quot;day&quot;}</field>
+	<field name="cron">{}</field>
+	<field name="filter">{&quot;Filter.###Vendor&quot;:&quot;ABB&quot;}</field>
+	<field name="recipients">{&quot;Recipient.Agents&quot;:[&quot;55&quot;,&quot;11&quot;,&quot;2&quot;]}</field>
+	<field name="subject">Заканчивается ABB NewSET license</field>
+	<field name="body">Внимание,
+заканчивается ABB NewSET license.
+Пожалуйста, направьте уведомление об оплате в местное представительство ABB (контакт: Омар Таспай). Партномер для заказа: 4NWP101322R0001 - NewSET yearly license fee. Цена за одну лицензию: 178 долларов США.</field>
+	<field name="max_mail">daily</field>
+	<field name="comments" xsi:nil="true" />
+	<field name="eventname" xsi:nil="true" />
+	<field name="create_time">2022-09-12 15:25:33</field>
+	<field name="create_by">2</field>
+	<field name="change_time">2022-09-12 15:25:33</field>
+	<field name="change_by">2</field>
+  </row>
+</resultset>

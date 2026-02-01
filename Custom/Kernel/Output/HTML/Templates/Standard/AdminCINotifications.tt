@@ -6,22 +6,32 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1>[% Translate("Notification Management") | html %]</h1>
 
-    <div class="SidebarColumn">
-        <div class="WidgetSimple">
+[% RenderBlockStart("ActionOverview") %]
+[% RenderBlockEnd("ActionOverview") %]
+
+<style type="text/css">
+    .DataTable th, .DataTable td {
+        padding: 8px 10px !important;
+    }
+    .MainBox.AdminManagement .ContentColumn h1 {
+        margin-bottom: 20px;
+        font-size: 22px;
+        color: #333;
+    }
+</style>
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple WidgetActions">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>
             <div class="Content">
                 <ul class="ActionList">
-[% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
-                    <li>&nbsp;</li>
-[% RenderBlockEnd("ActionOverview") %]
                     <li>
                         <h3>[% Translate("Add notification") | html %]</h3>
                         <form action="[% Env("Baselink") %]" method="post" id="PSAddCINotification">
@@ -29,11 +39,11 @@
                             <input type="hidden" name="Subaction" value="Edit" />
                             [% Data.ClassSelect %]
 [% WRAPPER JSOnDocumentComplete %]
-$(document).ready( function() {
+<script type="text/javascript">//<![CDATA[
     $('#PSAddCINotification > #ClassID').bind( 'change', function() {
         $(this).closest( 'form' ).submit();
     });
-});
+//]]></script>
 [% END %]
                         </form>
                     </li>
@@ -42,410 +52,418 @@ $(document).ready( function() {
         </div>
     </div>
 
+    <div class="ContentColumn ContentWrapper">
+        <h1 class="InvisibleText">[% Translate("Notification Management") | html %]</h1>
 
-    <div class="ContentColumn">
+        <div class="InnerMainBoxContent">
+            <div class="ContentColumn">
+                <div class="SpacingBottomLarge">
+                    <h1>[% Translate("Notification Management") | html %]</h1>
+                </div>
+
 [% RenderBlockStart("OverviewResult") %]
-        <div class="WidgetSimple">
-            <div class="Header">
-                <h2>[% Translate("List") | html %]</h2>
-            </div>
-            <div class="Content">
-                <table class="DataTable">
-                    <thead>
-                        <tr>
-                            <th class="W20pc">[% Translate("Name") | html %]</th>
-                            <th>[% Translate("Class") | html %]</th>
-                            <th>[% Translate("Comment") | html %]</th>
-                            <th>[% Translate("Validity") | html %]</th>
-                            <th>[% Translate("Changed") | html %]</th>
-                            <th>[% Translate("Created") | html %]</th>
-                            <th>[% Translate("Delete") | html %]</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="WidgetSimple">
+                    <div class="Header">
+                        <h2>[% Translate("List") | html %]</h2>
+                    </div>
+                    <div class="Content scroll-bar-styled">
+                        <table class="DataTable">
+                            <thead>
+                                <tr>
+                                    <th class="W20pc">[% Translate("Name") | html %]</th>
+                                    <th>[% Translate("Class") | html %]</th>
+                                    <th>[% Translate("Comment") | html %]</th>
+                                    <th>[% Translate("Validity") | html %]</th>
+                                    <th>[% Translate("Changed") | html %]</th>
+                                    <th>[% Translate("Created") | html %]</th>
+                                    <th class="Center">[% Translate("Delete") | html %]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 [% RenderBlockStart("NoDataFoundMsg") %]
-                        <tr>
-                            <td colspan="7">
-                                [% Translate("No data found.") | html %]
-                            </td>
-                        </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        [% Translate("No data found.") | html %]
+                                    </td>
+                                </tr>
 [% RenderBlockEnd("NoDataFoundMsg") %]
 [% RenderBlockStart("OverviewResultRow") %]
-                        <tr>
-                            <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Edit;ClassID=[% Data.ClassID | uri %];Name=[% Data.Name | uri %]">[% Data.Name | html %]</a></td>
-                            <td>[% Data.Class | html %]</td>
-                            <td title="[% Data.Comment | html %]">[% Data.Comment | truncate(26) | html %]</td>
-                            <td>[% Translate(Data.Valid) | html %]</td>
-                            <td>[% Data.ChangeTime | Localize("TimeShort") %]</td>
-                            <td>[% Data.CreateTime | Localize("TimeShort") %]</td>
-                            <td class="Center">
-                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this notification") | html %]"><i class="fa fa-trash-o"></i></a>
-                            </td>
-                        </tr>
+                                <tr>
+                                    <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Edit;ClassID=[% Data.ClassID | uri %];Name=[% Data.Name | uri %]">[% Data.Name | html %]</a></td>
+                                    <td>[% Data.Class | html %]</td>
+                                    <td title="[% Data.Comment | html %]">[% Data.Comment | truncate(35) | html %]</td>
+                                    <td>[% Translate(Data.Valid) | html %]</td>
+                                    <td>[% Data.ChangeTime | Localize("TimeShort") %]</td>
+                                    <td>[% Data.CreateTime | Localize("TimeShort") %]</td>
+                                    <td class="Center">
+                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this notification") | html %]" class="table-actions-button"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
 [% RenderBlockEnd("OverviewResultRow") %]
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 [% RenderBlockEnd("OverviewResult") %]
 
 [% RenderBlockStart("OverviewUpdate") %]
-        <form action="[% Env("CGIHandle") %]" method="post"  class="Validate" name="compose">
-            <div class="WidgetSimple">
-                <div class="Header">
+                <form action="[% Env("CGIHandle") %]" method="post"  class="Validate PreventMultipleSubmits" name="compose">
+                    <div class="WidgetSimple">
+                        <div class="Header">
 [% RenderBlockStart("HeaderAdd") %]
-                    <h2>[% Translate("Add Notification") | html %] - [% Translate(Data.ClassName) | html %]</h2>
+                            <h2>[% Translate("Add Notification") | html %] - [% Translate(Data.ClassName) | html %]</h2>
 [% RenderBlockEnd("HeaderAdd") %]
 [% RenderBlockStart("HeaderEdit") %]
-                    <h2>[% Translate("Edit Notification") | html %] - [% Translate(Data.ClassName) | html %]</h2>
+                            <h2>[% Translate("Edit Notification") | html %] - [% Translate(Data.ClassName) | html %]</h2>
 [% RenderBlockEnd("HeaderEdit") %]
-                </div>
-                <div class="Content">
-
-                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                    <input type="hidden" name="Subaction" value="Save"/>
-                    <input type="hidden" name="OldName" value="[% Data.OldName | html %]"/>
-                    <input type="hidden" name="ClassID" value="[% Data.ClassID | html %]"/>
-
-                    <fieldset class="TableLike">
-                        <label for="Name" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Name") | html %]:
-                        </label>
-                        <div class="Field">
-                            <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid %]" maxlength="200"/>
-                            <div id="NameError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="NameServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
                         </div>
-                        <div class="Clear"></div>
+                        <div class="Content">
 
-                        <label for="Comment">[% Translate("Comment") | html %]: </label>
-                        <div class="Field">
-                            <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="Save"/>
+                            <input type="hidden" name="OldName" value="[% Data.OldName | html %]"/>
+                            <input type="hidden" name="ClassID" value="[% Data.ClassID | html %]"/>
+
+                            <fieldset class="TableLike">
+                                <label for="Name" class="Mandatory">
+                                    <span class="Marker">*</span>
+                                    [% Translate("Name") | html %]:
+                                </label>
+                                <div class="Field">
+                                    <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid %]" maxlength="200"/>
+                                    <div id="NameError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="NameServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                                <div class="Clear"></div>
+
+                                <label for="Comment">[% Translate("Comment") | html %]: </label>
+                                <div class="Field">
+                                    <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
+                                </div>
+                                <div class="Clear"></div>
+
+                                <label for="MaxMail">[% Translate("Mail Frequency") | html %]: </label>
+                                <div class="Field">
+                                    [% Data.MaxMailSelect %]
+                                </div>
+                                <div class="Clear"></div>
+
+                                <label for="ValidID">[% Translate("Validity") | html %]: </label>
+                                <div class="Field">
+                                    [% Data.ValidSelect %]
+                                </div>
+                                <div class="Clear"></div>
+
+                            </fieldset>
                         </div>
-                        <div class="Clear"></div>
-
-                        <label for="MaxMail">[% Translate("Mail Frequency") | html %]: </label>
-                        <div class="Field">
-                            [% Data.MaxMailSelect %]
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="ValidID">[% Translate("Validity") | html %]: </label>
-                        <div class="Field">
-                            [% Data.ValidSelect %]
-                        </div>
-                        <div class="Clear"></div>
-
-                    </fieldset>
-                </div>
-            </div>
+                    </div>
 
 [% RenderBlockStart("Cron") %]
-            <div class="WidgetSimple SpacingTop Collapsed">
-                <div class="Header">
-                    <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                    <div class="WidgetSimple SpacingTop Collapsed">
+                        <div class="Header">
+                            <div class="WidgetAction Toggle">
+                                <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                            </div>
+                            <h2>[% Translate("Cron-based") | html %]</h2>
+                        </div>
+
+                        <div class="Content">
+                            <fieldset class="TableLike">
+                                <div class="Field">
+                                    <table class="DataTable VariableWidth" summary="[% Translate("Execution Schedule") | html %]">
+                                        <thead>
+                                            <tr>
+                                                <th><label for="ScheduleMinutes">[% Translate("Schedule minutes") | html %]</label></th>
+                                                <th><label for="ScheduleHours">[% Translate("Schedule hours") | html %]</label></th>
+                                                <th><label for="ScheduleDays">[% Translate("Schedule days") | html %]</label></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    [% Data.ScheduleMinutesList %]
+                                                </td>
+                                                <td>
+                                                    [% Data.ScheduleHoursList %]
+                                                </td>
+                                                <td>
+                                                    [% Data.ScheduleDaysList %]
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="Clear"></div>
+
+                                <label for="CronString">[% Translate("Cron string") | html %]: </label>
+                                <div class="Field">
+                                    <input type="text" name="CronString" id="CronString" value="[% Data.CronString | html %]" class="W50pc" maxlength="250" placeholder="[% Translate("*/10 * * * * to send notification every 10 minute") %]"/>
+                                </div>
+                                <div class="Clear"></div>
+
+                            </fieldset>
+                        </div>
                     </div>
-                    <h2>[% Translate("Cron-based") | html %]</h2>
-                </div>
-
-                <div class="Content">
-                    <fieldset class="TableLike">
-                        <div class="Field">
-                            <table class="DataTable VariableWidth" summary="[% Translate("Execution Schedule") | html %]">
-                                <thead>
-                                    <tr>
-                                        <th><label for="ScheduleMinutes">[% Translate("Schedule minutes") | html %]</label></th>
-                                        <th><label for="ScheduleHours">[% Translate("Schedule hours") | html %]</label></th>
-                                        <th><label for="ScheduleDays">[% Translate("Schedule days") | html %]</label></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <td>
-                                        [% Data.ScheduleMinutesList %]
-                                    </td>
-                                    <td>
-                                        [% Data.ScheduleHoursList %]
-                                    </td>
-                                    <td>
-                                        [% Data.ScheduleDaysList %]
-                                    </td>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="CronString">[% Translate("Cron string") | html %]: </label>
-                        <div class="Field">
-                            <input type="text" name="CronString" id="CronString" value="[% Data.CronString | html %]" class="W50pc" maxlength="250" placeholder="[% Translate("*/10 * * * * to send notification every 10 minute") %]"/>
-                        </div>
-                        <div class="Clear"></div>
-
-                    </fieldset>
-                </div>
-            </div>
 [% RenderBlockEnd("Cron") %]
 
+                    <div class="WidgetSimple SpacingTop">
+                        <div class="Header">
+                            <div class="WidgetAction Toggle">
+                                <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                            </div>
+                            <h2>[% Translate("Events") | html %]</h2>
+                        </div>
 
-            <div class="WidgetSimple SpacingTop">
-                <div class="Header">
-                    <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
-                    </div>
-                    <h2>[% Translate("Events") | html %]</h2>
-                </div>
-
-                <div class="Content">
-                    <fieldset class="TableLike">
+                        <div class="Content">
+                            <fieldset class="TableLike">
 
 [% RenderBlockStart("DateField") %]
-                        <label for="Events">
-                            [% Data.LeveledLabel | html %]
-                        </label>
-                        <div class="Field">
-                            <input type="radio" name="[% Data.RadioName | html %]" id="SearchTypeNone" value="" [% Data.item("SearchType::None") %]/>
-                            [% Translate("Do not use this field.") | html %]
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="Events">
+                                    [% Data.LeveledLabel | html %]
+                                </label>
+                                <div class="Field">
+                                    <input type="radio" name="[% Data.RadioName | html %]" id="SearchTypeNone" value="" [% Data.item("SearchType::None") %]/>
+                                    [% Translate("Do not use this field.") | html %]
+                                </div>
+                                <div class="Clear"></div>
 
-                        <div class="Field">
-                            <input type="radio" name="[% Data.RadioName | html %]" value="TimePoint" [% Data.item("SearchType::TimePoint") %]/>
-                            [% Translate("Date reached") | html %] [% Data.TimePointStart %] [% Data.TimePoint %] [% Data.TimePointFormat %].
-                        </div>
-                        <div class="Clear"></div>
+                                <div class="Field">
+                                    <input type="radio" name="[% Data.RadioName | html %]" value="TimePoint" [% Data.item("SearchType::TimePoint") %]/>
+                                    [% Translate("Date reached") | html %] [% Data.TimePointStart %] [% Data.TimePoint %] [% Data.TimePointFormat %].
+                                </div>
+                                <div class="Clear"></div>
 
-                        <div class="Field">
-                            <input type="radio" name="[% Data.RadioName | html %]" value="TimeSlot" [% Data.item("SearchType::TimeSlot") %]/>
-                            [% Translate("Date reached between") | html %] [% Data.TimeStart %] [% Translate("and") | html %] [% Data.TimeStop %].
-                        </div>
-                        <div class="Clear"></div>
+                                <div class="Field">
+                                    <input type="radio" name="[% Data.RadioName | html %]" value="TimeSlot" [% Data.item("SearchType::TimeSlot") %]/>
+                                    [% Translate("Date reached between") | html %] [% Data.TimeStart %] [% Translate("and") | html %] [% Data.TimeStop %].
+                                </div>
+                                <div class="Clear"></div>
 [% RenderBlockEnd("DateField") %]
 
-                    </fieldset>
-                </div>
-            </div>
-
-            <div class="WidgetSimple SpacingTop Collapsed">
-                <div class="Header">
-                    <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
-                    </div>
-                    <h2>[% Translate("CI Filter") | html %]</h2>
-                </div>
-
-                <div class="Content">
-                    <fieldset class="TableLike">
-[% RenderBlockStart("FilterFieldName") %]
-                        <label for="[% Data.Name | html %]">[% Translate("Name") | html %]: </label>
-                        <div class="Field">
-                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" class="W50pc" value="[% Data.Value | html %]"/>
+                            </fieldset>
                         </div>
-                        <div class="Clear"></div>
+                    </div>
+
+                    <div class="WidgetSimple SpacingTop Collapsed">
+                        <div class="Header">
+                            <div class="WidgetAction Toggle">
+                                <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                            </div>
+                            <h2>[% Translate("CI Filter") | html %]</h2>
+                        </div>
+
+                        <div class="Content">
+                            <fieldset class="TableLike">
+[% RenderBlockStart("FilterFieldName") %]
+                                <label for="[% Data.Name | html %]">[% Translate("Name") | html %]: </label>
+                                <div class="Field">
+                                    <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" class="W50pc" value="[% Data.Value | html %]"/>
+                                </div>
+                                <div class="Clear"></div>
 [% RenderBlockEnd("FilterFieldName") %]
 
 [% RenderBlockStart("FilterFieldSelect") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]: </label>
-                        <div class="Field">
-                            [% Data.Select %]
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]: </label>
+                                <div class="Field">
+                                    [% Data.Select %]
+                                </div>
+                                <div class="Clear"></div>
 [% RenderBlockEnd("FilterFieldSelect") %]
 
 [% RenderBlockStart("FilterField") %]
-                        <label for="[% Data.Name | html %]">[% Data.LeveledLabel | html %]: </label>
-                        <div class="Field">
-                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" class="W50pc" value="[% Data.Value | html %]"/>
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="[% Data.Name | html %]">[% Data.LeveledLabel | html %]: </label>
+                                <div class="Field">
+                                    <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" class="W50pc" value="[% Data.Value | html %]"/>
+                                </div>
+                                <div class="Clear"></div>
 [% RenderBlockEnd("FilterField") %]
 
-                    </fieldset>
-                </div>
-            </div>
-
-            <div class="WidgetSimple SpacingTop">
-                <div class="Header">
-                    <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
-                    </div>
-                    <h2>[% Translate("Metadata") | html %]</h2>
-                </div>
-
-                <div class="Content">
-                    <fieldset class="TableLike">
-                        <label for="Eventname">[% Translate("Event to fire") | html %]: </label>
-                        <div class="Field">
-                            CINotification_<input type="text" name="Eventname" value="[% Data.Eventname | html %]" class="W75p" />
+                            </fieldset>
                         </div>
-                        <div class="Clear"></div>
-
-                    </fieldset>
-                </div>
-            </div>
-
-            <div class="WidgetSimple SpacingTop">
-                <div class="Header">
-                    <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
                     </div>
-                    <h2>[% Translate("Recipient") | html %]</h2>
-                </div>
 
-                <div class="Content">
-                    <fieldset class="TableLike">
+                    <div class="WidgetSimple SpacingTop">
+                        <div class="Header">
+                            <div class="WidgetAction Toggle">
+                                <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                            </div>
+                            <h2>[% Translate("Metadata") | html %]</h2>
+                        </div>
+
+                        <div class="Content">
+                            <fieldset class="TableLike">
+                                <label for="Eventname">[% Translate("Event to fire") | html %]: </label>
+                                <div class="Field">
+                                    CINotification_<input type="text" name="Eventname" value="[% Data.Eventname | html %]" class="W75p" />
+                                </div>
+                                <div class="Clear"></div>
+
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="WidgetSimple SpacingTop">
+                        <div class="Header">
+                            <div class="WidgetAction Toggle">
+                                <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                            </div>
+                            <h2>[% Translate("Recipient") | html %]</h2>
+                        </div>
+
+                        <div class="Content">
+                            <fieldset class="TableLike">
 [% RenderBlockStart("Recipients") %]
-                        <label for="Recipient.Field">[% Translate("Recipient groups") | html %]: </label>
-                        <div class="Field">
-                            [% Data.RecipientFields %]
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="Recipient.Field">[% Translate("Recipient groups") | html %]: </label>
+                                <div class="Field">
+                                    [% Data.RecipientFields %]
+                                </div>
+                                <div class="Clear"></div>
 
-                        <label for="Recipient.Agents">[% Translate("Recipient agents") | html %]: </label>
-                        <div class="Field">
-                            [% Data.AgentsSelect %]
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="Recipient.Agents">[% Translate("Recipient agents") | html %]: </label>
+                                <div class="Field">
+                                    [% Data.AgentsSelect %]
+                                </div>
+                                <div class="Clear"></div>
 
-                        <label for="Recipient.Groups">[% Translate("Recipient groups") | html %]: </label>
-                        <div class="Field">
-                            [% Data.GroupsSelect %]
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="Recipient.Groups">[% Translate("Recipient groups") | html %]: </label>
+                                <div class="Field">
+                                    [% Data.GroupsSelect %]
+                                </div>
+                                <div class="Clear"></div>
 
-                        <label for="Recipient.Roles">[% Translate("Recipient roles") | html %]: </label>
-                        <div class="Field">
-                            [% Data.RolesSelect %]
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="Recipient.Roles">[% Translate("Recipient roles") | html %]: </label>
+                                <div class="Field">
+                                    [% Data.RolesSelect %]
+                                </div>
+                                <div class="Clear"></div>
 
-                        <label for="RecipientEmail">[% Translate("Recipient email addresses") | html %]: </label>
-                        <div class="Field">
-                            <input type="text" name="RecipientEmail" id="RecipientEmail" class="W50pc" value="[% Data.RecipientEmail | html %]"/>
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="RecipientEmail">[% Translate("Recipient email addresses") | html %]: </label>
+                                <div class="Field">
+                                    <input type="text" name="RecipientEmail" id="RecipientEmail" class="W50pc" value="[% Data.RecipientEmail | html %]"/>
+                                </div>
+                                <div class="Clear"></div>
 
-                        <label for="Recipient.Queues">[% Translate("Queue") | html %]: </label>
-                        <div class="Field">
-                            [% Data.QueuesSelect %]
-                        </div>
-                        <div class="Clear"></div>
+                                <label for="Recipient.Queues">[% Translate("Queue") | html %]: </label>
+                                <div class="Field">
+                                    [% Data.QueuesSelect %]
+                                </div>
+                                <div class="Clear"></div>
 
 [% RenderBlockEnd("Recipients") %]
-                    </fieldset>
-                </div>
-            </div>
-
-            <div class="WidgetSimple SpacingTop">
-                <div class="Header">
-                    <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                            </fieldset>
+                        </div>
                     </div>
-                    <h2>[% Translate("Notification") | html %]</h2>
-                </div>
 
-                <div class="Content">
-                    <fieldset class="TableLike">
-
-                        <label for="Subject" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Subject") | html %]:
-                        </label>
-                        <div class="Field">
-                            <input type="text" name="Subject" id="Subject" value="[% Data.Subject | html %]" class="W50pc Validate_Required [% Data.SubjectInvalid %]" maxlength="200"/>
-                            <div id="SubjectError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                    <div class="WidgetSimple SpacingTop">
+                        <div class="Header">
+                            <div class="WidgetAction Toggle">
+                                <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
                             </div>
-                            <div id="SubjectServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
+                            <h2>[% Translate("Notification") | html %]</h2>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="Body" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Text") | html %]:
-                        </label>
-                        <div class="RichTextField">
-                            <textarea rows="12" cols="75" name="Body" id="Body" class="Validate_Required [% Data.BodyInvalid %]">[% Data.Body | html %]</textarea>
-                            <div id="BodyError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="BodyServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
+                        <div class="Content">
+                            <fieldset class="TableLike">
+
+                                <label for="Subject" class="Mandatory">
+                                    <span class="Marker">*</span>
+                                    [% Translate("Subject") | html %]:
+                                </label>
+                                <div class="Field">
+                                    <input type="text" name="Subject" id="Subject" value="[% Data.Subject | html %]" class="W50pc Validate_Required [% Data.SubjectInvalid %]" maxlength="200"/>
+                                    <div id="SubjectError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="SubjectServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                                <div class="Clear"></div>
+
+                                <label for="Body" class="Mandatory">
+                                    <span class="Marker">*</span>
+                                    [% Translate("Text") | html %]:
+                                </label>
+                                <div class="RichTextField">
+                                    <textarea rows="12" cols="75" name="Body" id="Body" class="Validate_Required [% Data.BodyInvalid %]">[% Data.Body | html %]</textarea>
+                                    <div id="BodyError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="BodyServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                                <div class="Clear"></div>
+
+                                <label for="NotificationArticleTypeID">[% Translate("Notification article type") | html %]: </label>
+                                <div class="Field">
+                                    [% Data.NotificationArticleTypesStrg %]
+                                    <p class="FieldExplanation">([% Translate("Only for notifications to specified email addresses") | html %])</p>
+                                </div>
+                                <div class="Clear"></div>
+
+                            </fieldset>
                         </div>
-                        <div class="Clear"></div>
+                    </div>
 
-                        <label for="NotificationArticleTypeID">[% Translate("Notification article type") | html %]: </label>
-                        <div class="Field">
-                            [% Data.NotificationArticleTypesStrg %]
-                            <p class="FieldExplanation">([% Translate("Only for notifications to specified email addresses") | html %])</p>
+                    <div class="WidgetSimple SpacingTop">
+                        <div class="Header">
+                            <h2>[% Translate("Save Changes") | html %]</h2>
                         </div>
-                        <div class="Clear"></div>
 
-                    </fieldset>
+                        <div class="Content">
+                            <fieldset class="TableLike">
+
+                                <div class="Field SpacingTop">
+                                    <button class="btn-primary btn-main" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                    [% Translate("or") | html %]
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                                </div>
+                                <div class="Clear"></div>
+
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="WidgetSimple SpacingTop">
+                    <div class="Header">
+                        <h2>[% Translate("Reference") | html %]</h2>
+                    </div>
+
+                    <div class="Content">
+
+                        <p>[% Translate("Notifications are sent to an agent or a customer.") | html %]</p>
+
+                        <p>[% Translate("You can use the following tags") | html %]:</p>
+                        <dl>
+
+                            <dt><code>&lt;OTRS_TICKET_*&gt;</code></dt>
+                            <dd>
+                                [% Translate("Options of the ticket data") | html %]
+                                ([% Translate(" e. g.") | html %] <code>&lt;OTRS_TICKET_TicketNumber&gt;, &lt;OTRS_TICKET_TicketID&gt;,
+                                &lt;OTRS_TICKET_Queue&gt;, &lt;OTRS_TICKET_State&gt;</code>).
+                            </dd>
+
+                            <dt><code>&lt;OTRS_CONFIG_*&gt;</code></dt>
+                            <dd>
+                                [% Translate("Config options") | html %]
+                                ([% Translate(" e. g.") | html %] <code>&lt;OTRS_CONFIG_HttpType&gt;</code>).
+                            </dd>
+
+
+                        </dl>
+
+
+                    </div>
                 </div>
-            </div>
-
-            <div class="WidgetSimple SpacingTop">
-                <div class="Header">
-                    <h2>[% Translate("Save Changes") | html %]</h2>
-                </div>
-
-                <div class="Content">
-                    <fieldset class="TableLike">
-
-                        <div class="Field SpacingTop">
-                            <button class="Primary" type="submit" value="[% Translate("Save") | html %]">[% Translate("Save") | html %]</button>
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
-                        </div>
-                        <div class="Clear"></div>
-
-                    </fieldset>
-                </div>
-            </div>
-
-        </form>
-
-        <div class="WidgetSimple SpacingTop">
-            <div class="Header">
-                <h2>[% Translate("Reference") | html %]</h2>
-            </div>
-
-            <div class="Content">
-
-                <p>[% Translate("Notifications are sent to an agent or a customer.") | html %]</p>
-
-                <p>[% Translate("You can use the following tags") | html %]:</p>
-                <dl>
-
-                    <dt><code>&lt;OTRS_TICKET_*&gt;</code></dt>
-                    <dd>
-                        [% Translate("Options of the ticket data") | html %]
-                        ([% Translate(" e. g.") | html %] <code>&lt;OTRS_TICKET_TicketNumber&gt;, &lt;OTRS_TICKET_TicketID&gt;,
-                        &lt;OTRS_TICKET_Queue&gt;, &lt;OTRS_TICKET_State&gt;</code>).
-                    </dd>
-
-                    <dt><code>&lt;OTRS_CONFIG_*&gt;</code></dt>
-                    <dd>
-                        [% Translate("Config options") | html %]
-                        ([% Translate(" e. g.") | html %] <code>&lt;OTRS_CONFIG_HttpType&gt;</code>).
-                    </dd>
-
-
-                </dl>
-
-
+[% RenderBlockEnd("OverviewUpdate") %]
             </div>
         </div>
-[% RenderBlockEnd("OverviewUpdate") %]
-
     </div>
-    <div class="Clear"></div>
 </div>
