@@ -1,0 +1,44 @@
+---
+- Key: Type
+  Name: Тип сертификата
+  Searchable: 1
+  Input:
+    Type: GeneralCatalog
+    Class: ITSM::ConfigItem::Certificate::Type
+    Required: 1
+    Translation: 1
+- Key: Vendor
+  Name: Производитель
+  Searchable: 1
+  Input:
+    Type: GeneralCatalog
+    Class: ITSM::ConfigItem::Vendor
+    Required: 0
+    Translation: 1
+- Key: Reciever
+  Name: Получатель (Сотрудник)
+  Searchable: 1
+  Input:
+    Type: CIClassReference
+    ReferencedCIClassName: People
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Required: 1
+- Key: IssueDate
+  Name: Дата выдачи
+  Searchable: 1
+  Input:
+    Type: Date
+- Key: EndDate
+  Name: Действителен до
+  Searchable: 1
+  Input:
+    Type: Date
+- Key: Status
+  Name: Состояние
+  Searchable: 1
+  Input:
+    Type: GeneralCatalog
+    Class: ITSM::ConfigItem::DeploymentState
+    Required: 1

@@ -1,0 +1,36 @@
+---
+- Input:
+    Class: ITSM::ConfigItem::MeasuringTools::Type
+    Required: 1
+    Translation: 1
+    Type: GeneralCatalog
+  Key: ToolsType
+  Name: Тип прибора
+  Searchable: 1
+- Input:
+    MaxLength: 100
+    Size: 50
+    Type: Text
+  Key: SerialNumber
+  Name: Serial Number
+  Searchable: 1
+- Input:
+    ReferencedCIClassLinkType: DependsOn
+    ReferencedCIClassName: People
+    ReferencedCIClassReferenceAttributeKey: FIO
+    SearchInputType: AutoComplete
+    Type: CIClassReference
+  Key: Vladelec
+  Name: Владелец
+  Searchable: 1
+- CountDefault: 0
+  CountMin: 0
+  Input:
+    Type: TextArea
+  Key: Notes
+  Name: Заметки
+- Input:
+    Type: Text
+  Key: Object
+  Name: Объект
+  Searchable: 1

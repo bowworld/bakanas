@@ -1,0 +1,49 @@
+import csv
+import json
+
+source_file = '/Users/sabyrzhanzhakipov/znuny-mount/old_otrs_cmdb_export_v2.csv'
+output_file = '/Users/sabyrzhanzhakipov/znuny-mount/tools_minimal_test.csv'
+
+def fix_mojibake(s):
+    if not s: return ""
+    try: return s.encode('latin1').decode('utf-8')
+    except: return s
+
+with open(source_file, 'r', encoding='utf-8') as f, \
+     open(output_file, 'w', encoding='utf-8', newline='') as f_out:
+    
+    reader = csv.reader(f)
+    next(reader)
+    writer = csv.writer(f_out, delimiter=';')
+    
+    # 6 Fields: Name; Deployment State; Incident State; Type; Serial Number; Notes
+    
+    for row in reader:
+        cls, name_orig, status, json_data = row[0], row[1], row[2], row[3]
+        if cls != 'Tools': continue
+            
+        try:
+            data = json.loads(json_data)
+            v = data[1]['Version'][1]
+            t_type = fix_mojibake(v.get('ToolsType', [None, {}])[1].get('ResolvedName', ''))
+            serial = v.get('SerialNumber', [None, {}])[1].get('Content', '')
+            notes = fix_mojibake(v.get('Notes', [None, {}])[1].get('Content', '')).replace('\n', ' ').replace('\r', '')
+            
+            item_name = fix_mojibake(name_orig)
+            if not item_name or item_name.strip() == "":
+                item_name = f"{t_type} ({serial})" if serial else t_type
+            
+            if not item_name: continue
+            
+            writer.writerow([
+                item_name,
+                "In Use",
+                "Operational",
+                t_type,
+                serial,
+                notes
+            ])
+                
+        except: continue
+
+print("Minimal test CSV generated.")
